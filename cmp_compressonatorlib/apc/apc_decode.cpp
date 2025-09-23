@@ -23,7 +23,7 @@
 
 #include "apc_decode.h"
 
-void (*APC_DecompressBlock)(void* in, void* out) = NULL;
+void (*APC_DecompressBlock)(void* in, void* out) = nullptr;
 
 void APCBlockDecoder::DecompressBlock(CMP_BYTE out[MAX_SUBSET_SIZE][MAX_DIMENSION_BIG], CMP_BYTE in[COMPRESSED_BLOCK_SIZE])
 {

@@ -39,13 +39,13 @@ public:
 
     virtual CodecError Compress(CCodecBuffer&       bufferIn,
                                 CCodecBuffer&       bufferOut,
-                                Codec_Feedback_Proc pFeedbackProc = NULL,
-                                CMP_DWORD_PTR       pUser1        = NULL,
-                                CMP_DWORD_PTR       pUser2        = NULL);
+                                Codec_Feedback_Proc pFeedbackProc = nullptr,
+                                CMP_DWORD_PTR       pUser1        = nullptr,
+                                CMP_DWORD_PTR       pUser2        = nullptr);
     virtual CodecError Decompress(CCodecBuffer&       bufferIn,
                                   CCodecBuffer&       bufferOut,
-                                  Codec_Feedback_Proc pFeedbackProc = NULL,
-                                  CMP_DWORD_PTR       pUser1        = NULL,
-                                  CMP_DWORD_PTR       pUser2        = NULL);
+                                  Codec_Feedback_Proc pFeedbackProc = nullptr,
+                                  CMP_DWORD_PTR       pUser1        = nullptr,
+                                  CMP_DWORD_PTR       pUser2        = nullptr);
 };
 #endif  // !defined(_CODEC_ATC_RGBA_INTERP_H_INCLUDED_)

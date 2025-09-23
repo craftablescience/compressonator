@@ -23,7 +23,7 @@
 
 #include "apc_encode.h"
 
-void (*APC_CompressBlock)(void* srcblock, void* outblock, void* blockoptions) = NULL;
+void (*APC_CompressBlock)(void* srcblock, void* outblock, void* blockoptions) = nullptr;
 
 double APCBlockEncoder::CompressBlock(CMP_BYTE* srcblock, CMP_BYTE outblock[COMPRESSED_BLOCK_SIZE])
 {

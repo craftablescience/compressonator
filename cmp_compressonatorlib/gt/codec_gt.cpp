@@ -92,7 +92,7 @@ CCodec_GTC::CCodec_GTC()
     m_Use_MultiThreading   = true;
     m_NumThreads           = 0;
     m_NumEncodingThreads   = 0;
-    m_EncodingThreadHandle = NULL;
+    m_EncodingThreadHandle = nullptr;
     m_LiveThreads          = 0;
     m_LastThread           = 0;
 
@@ -101,7 +101,7 @@ CCodec_GTC::CCodec_GTC()
 
 bool CCodec_GTC::SetParameter(const CMP_CHAR* pszParamName, CMP_CHAR* sValue)
 {
-    if (sValue == NULL)
+    if (sValue == nullptr)
         return false;
 
     if (strcmp(pszParamName, CodecParameters::NumThreads) == 0)
@@ -193,25 +193,25 @@ CCodec_GTC::~CCodec_GTC()
 
         }  // MultiThreading
 
-        m_EncodingThreadHandle = NULL;
+        m_EncodingThreadHandle = nullptr;
 
         if (m_EncodeParameterStorage)
             delete[] m_EncodeParameterStorage;
-        m_EncodeParameterStorage = NULL;
+        m_EncodeParameterStorage = nullptr;
 
         for (int i = 0; i < m_NumEncodingThreads; i++)
         {
             if (m_encoder[i])
             {
                 delete m_encoder[i];
-                m_encoder[i] = NULL;
+                m_encoder[i] = nullptr;
             }
         }
 
         if (m_decoder)
         {
             delete m_decoder;
-            m_decoder = NULL;
+            m_decoder = nullptr;
         }
 
         m_LibraryInitialized = false;
@@ -224,7 +224,7 @@ CodecError CCodec_GTC::InitializeGTCLibrary()
     {
         for (CMP_DWORD i = 0; i < MAX_GT_THREADS; i++)
         {
-            m_encoder[i] = NULL;
+            m_encoder[i] = nullptr;
         }
 
         // Create threaded encoder instances
@@ -251,7 +251,7 @@ CodecError CCodec_GTC::InitializeGTCLibrary()
         if (!m_EncodingThreadHandle)
         {
             delete[] m_EncodeParameterStorage;
-            m_EncodeParameterStorage = NULL;
+            m_EncodeParameterStorage = nullptr;
 
             return CE_Unknown;
         }
@@ -267,15 +267,15 @@ CodecError CCodec_GTC::InitializeGTCLibrary()
             if (!m_encoder[i])
             {
                 delete[] m_EncodeParameterStorage;
-                m_EncodeParameterStorage = NULL;
+                m_EncodeParameterStorage = nullptr;
 
                 delete[] m_EncodingThreadHandle;
-                m_EncodingThreadHandle = NULL;
+                m_EncodingThreadHandle = nullptr;
 
                 for (CMP_INT j = 0; j < i; j++)
                 {
                     delete m_encoder[j];
-                    m_encoder[j] = NULL;
+                    m_encoder[j] = nullptr;
                 }
 
                 return CE_Unknown;
@@ -307,7 +307,7 @@ CodecError CCodec_GTC::InitializeGTCLibrary()
             for (CMP_INT j = 0; j < m_NumEncodingThreads; j++)
             {
                 delete m_encoder[j];
-                m_encoder[j] = NULL;
+                m_encoder[j] = nullptr;
             }
             return CE_Unknown;
         }
@@ -332,7 +332,7 @@ CodecError CCodec_GTC::EncodeGTCBlock(CMP_BYTE* in, CMP_BYTE* out)
         threadIndex    = m_LastThread;
         while (found == FALSE)
         {
-            if (m_EncodeParameterStorage == NULL)
+            if (m_EncodeParameterStorage == nullptr)
                 return CE_Unknown;
 
             if (m_EncodeParameterStorage[threadIndex].run == FALSE)
@@ -480,7 +480,7 @@ CodecError CCodec_GTC::Compress(CCodecBuffer& bufferIn, CCodecBuffer& bufferOut,
 }
 
 #ifdef USE_FILEIO_DECODE
-FILE* gt_File_Decode = NULL;
+FILE* gt_File_Decode = nullptr;
 char  ModesUsed[CMP_MAXGTMODES + 1];
 #endif
 
@@ -704,7 +704,7 @@ CodecError CCodec_GTC::Decompress(CCodecBuffer&       bufferIn,
 
             fprintf(gt_File_Decode, "\nDone\n");
             fclose(gt_File_Decode);
-            gt_File_Decode = NULL;
+            gt_File_Decode = nullptr;
         }
     #endif
     ******************************************/

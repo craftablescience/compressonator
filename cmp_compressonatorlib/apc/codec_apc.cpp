@@ -48,7 +48,7 @@
 
 #ifdef USE_FILEIO
 #include <stdio.h>
-FILE* gt_File       = NULL;
+FILE* gt_File       = nullptr;
 int   gt_blockcount = 0;
 int   gt_total_MSE  = 0;
 #endif
@@ -79,7 +79,7 @@ unsigned int _stdcall APCThreadProcEncode(void* param)
     return 0;
 }
 
-static APCEncodeThreadParam* g_EncodeParameterStorage = NULL;
+static APCEncodeThreadParam* g_EncodeParameterStorage = nullptr;
 
 //////////////////////////////////////////////////////////////////////////////
 // Construction/Destruction
@@ -93,7 +93,7 @@ CCodec_APC::CCodec_APC()
     m_Use_MultiThreading   = true;
     m_NumThreads           = 8;
     m_NumEncodingThreads   = m_NumThreads;
-    m_EncodingThreadHandle = NULL;
+    m_EncodingThreadHandle = nullptr;
     m_LiveThreads          = 0;
     m_LastThread           = 0;
     m_xdim                 = 8;
@@ -105,7 +105,7 @@ CCodec_APC::CCodec_APC()
 
 bool CCodec_APC::SetParameter(const CMP_CHAR* pszParamName, CMP_CHAR* sValue)
 {
-    if (sValue == NULL)
+    if (sValue == nullptr)
         return false;
 
     if (strcmp(pszParamName, CodecParameters::NumThreads) == 0)
@@ -197,25 +197,25 @@ CCodec_APC::~CCodec_APC()
 
         }  // MultiThreading
 
-        m_EncodingThreadHandle = NULL;
+        m_EncodingThreadHandle = nullptr;
 
         if (m_EncodeParameterStorage)
             delete[] m_EncodeParameterStorage;
-        m_EncodeParameterStorage = NULL;
+        m_EncodeParameterStorage = nullptr;
 
         for (int i = 0; i < m_NumEncodingThreads; i++)
         {
             if (m_encoder[i])
             {
                 delete m_encoder[i];
-                m_encoder[i] = NULL;
+                m_encoder[i] = nullptr;
             }
         }
 
         if (m_decoder)
         {
             delete m_decoder;
-            m_decoder = NULL;
+            m_decoder = nullptr;
         }
 
         m_LibraryInitialized = false;
@@ -228,7 +228,7 @@ CodecError CCodec_APC::InitializeAPCLibrary()
     {
         for (CMP_DWORD i = 0; i < MAX_GT_THREADS; i++)
         {
-            m_encoder[i] = NULL;
+            m_encoder[i] = nullptr;
         }
 
         // Create threaded encoder instances
@@ -249,7 +249,7 @@ CodecError CCodec_APC::InitializeAPCLibrary()
         if (!m_EncodingThreadHandle)
         {
             delete[] m_EncodeParameterStorage;
-            m_EncodeParameterStorage = NULL;
+            m_EncodeParameterStorage = nullptr;
 
             return CE_Unknown;
         }
@@ -265,15 +265,15 @@ CodecError CCodec_APC::InitializeAPCLibrary()
             if (!m_encoder[i])
             {
                 delete[] m_EncodeParameterStorage;
-                m_EncodeParameterStorage = NULL;
+                m_EncodeParameterStorage = nullptr;
 
                 delete[] m_EncodingThreadHandle;
-                m_EncodingThreadHandle = NULL;
+                m_EncodingThreadHandle = nullptr;
 
                 for (CMP_DWORD j = 0; j < i; j++)
                 {
                     delete m_encoder[j];
-                    m_encoder[j] = NULL;
+                    m_encoder[j] = nullptr;
                 }
 
                 return CE_Unknown;
@@ -305,7 +305,7 @@ CodecError CCodec_APC::InitializeAPCLibrary()
             for (CMP_DWORD j = 0; j < m_NumEncodingThreads; j++)
             {
                 delete m_encoder[j];
-                m_encoder[j] = NULL;
+                m_encoder[j] = nullptr;
             }
             return CE_Unknown;
         }
@@ -330,7 +330,7 @@ CodecError CCodec_APC::EncodeAPCBlock(CMP_BYTE* in, CMP_BYTE* out)
         threadIndex    = m_LastThread;
         while (found == FALSE)
         {
-            if (m_EncodeParameterStorage == NULL)
+            if (m_EncodeParameterStorage == nullptr)
                 return CE_Unknown;
 
             if (m_EncodeParameterStorage[threadIndex].run == FALSE)
@@ -477,7 +477,7 @@ CodecError CCodec_APC::Compress(CCodecBuffer& bufferIn, CCodecBuffer& bufferOut,
 }
 
 #ifdef USE_FILEIO_DECODE
-FILE* gt_File_Decode = NULL;
+FILE* gt_File_Decode = nullptr;
 char  ModesUsed[CMP_MAXGTMODES + 1];
 #endif
 
