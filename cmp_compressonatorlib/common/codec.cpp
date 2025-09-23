@@ -29,7 +29,7 @@
 
 #include "codec.h"
 
-#include "common.h"
+#include "cmp_common.h"
 #include "codec_common.h"
 #include "codec_ati1n.h"
 #include "codec_ati2n.h"

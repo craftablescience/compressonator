@@ -29,7 +29,7 @@
 #include <float.h>
 #include <stdio.h>
 #include <math.h>
-#include "common.h"
+#include "cmp_common.h"
 #include "bc7_definitions.h"
 #include "bc7_partitions.h"
 #include "bc7_encode.h"

@@ -27,7 +27,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
-#include "common.h"
+#include "cmp_common.h"
 #include "compressonator.h"
 #include "codec_dxt5_rbxg.h"
 

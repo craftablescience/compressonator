@@ -31,7 +31,7 @@
 
 #include "codec_block_4x4.h"
 #include "codec_common.h"
-#include "common.h"
+#include "cmp_common.h"
 
 #ifdef USE_ETCPACK
 #include "etcpack.h"

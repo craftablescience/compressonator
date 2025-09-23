@@ -29,7 +29,7 @@
 #ifndef _CODECBUFFER_H_INCLUDED_
 #define _CODECBUFFER_H_INCLUDED_
 
-#include "common.h"
+#include "cmp_common.h"
 #include "compressonator.h"
 #include "mathmacros.h"
 

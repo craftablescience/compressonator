@@ -27,7 +27,7 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #pragma warning(disable : 4100)  // Ignore warnings of unreferenced formal parameters
-#include "common.h"
+#include "cmp_common.h"
 #include "codec_bc6h.h"
 #include "bc7_definitions.h"
 #include "bc6h_library.h"

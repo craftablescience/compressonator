@@ -26,7 +26,7 @@
 #include <math.h>
 #include <float.h>
 #include <assert.h>
-#include "common.h"
+#include "cmp_common.h"
 #include "3dquant_constants.h"
 #include "3dquant_vpc.h"
 #include "bc7_definitions.h"

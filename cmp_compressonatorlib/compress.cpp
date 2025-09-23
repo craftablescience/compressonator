@@ -39,7 +39,7 @@
 #include "atiformats.h"
 #include "codec.h"
 #include "codec_common.h"
-#include "common.h"
+#include "cmp_common.h"
 #include "compressonator.h"
 #include "texture_utils.h"
 

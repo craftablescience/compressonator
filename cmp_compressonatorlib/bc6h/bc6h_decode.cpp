@@ -29,7 +29,7 @@
 
 #include <assert.h>
 #include "debug.h"
-#include "common.h"
+#include "cmp_common.h"
 #include "hdr_encode.h"
 #include "bc6h_definitions.h"
 #include "bc6h_decode.h"

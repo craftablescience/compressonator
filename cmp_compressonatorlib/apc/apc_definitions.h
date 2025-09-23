@@ -24,7 +24,7 @@
 #ifndef _APC_DEFINITIONS_H_
 #define _APC_DEFINITIONS_H_
 
-#include "common.h"
+#include "cmp_common.h"
 
 #define TRUE 1
 #define FALSE 0

@@ -28,7 +28,7 @@
 //////////////////////////////////////////////////////////////////////////////
 #pragma warning(disable : 4100)
 
-#include "common.h"
+#include "cmp_common.h"
 #include "codec_ati1n.h"
 
 #ifdef TEST_CMP_CORE_DECODER

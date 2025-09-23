@@ -51,8 +51,7 @@ file(GLOB_RECURSE CMP_SRCS
 
 add_library(CMP_Compressonator 
     STATIC
-    version.h
-    common.h
+    cmp_common.h
     compress.cpp
     compressonator.h
     compressonator.cpp
@@ -60,7 +59,7 @@ add_library(CMP_Compressonator
 )
 
 target_include_directories(CMP_Compressonator
-    PUBLIC
+    PRIVATE
     ./
     # Lossy Compression
     apc
@@ -85,7 +84,15 @@ target_include_directories(CMP_Compressonator
     ${PROJECT_SOURCE_DIR}/applications/_libs/cmp_math/
 )
 
-target_link_libraries(CMP_Compressonator PUBLIC CMP_Core)
+target_include_directories(CMP_Compressonator
+        PUBLIC
+        ${PROJECT_SOURCE_DIR}/cmp_compressonatorlib
+)
+
+target_link_libraries(CMP_Compressonator
+        PUBLIC
+        CMP_Core
+)
 
 # Set RPATH so the library can find its dependencies at runtime
 # // https://duerrenberger.dev/blog/2021/08/04/understanding-rpath-with-cmake/

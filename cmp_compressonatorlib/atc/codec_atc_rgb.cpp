@@ -28,7 +28,7 @@
 //////////////////////////////////////////////////////////////////////////////
 #pragma warning(disable : 4100)
 
-#include "common.h"
+#include "cmp_common.h"
 #include "codec_atc_rgb.h"
 #include "compressonator_tc.h"
 

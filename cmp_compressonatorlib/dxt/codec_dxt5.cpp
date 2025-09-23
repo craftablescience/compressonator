@@ -28,7 +28,7 @@
 //////////////////////////////////////////////////////////////////////////////
 #pragma warning(disable : 4100)
 
-#include "common.h"
+#include "cmp_common.h"
 #include "codec_dxt5.h"
 
 #ifdef TEST_CMP_CORE_DECODER

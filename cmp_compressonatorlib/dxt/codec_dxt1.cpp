@@ -28,7 +28,7 @@
 //////////////////////////////////////////////////////////////////////////////
 #pragma warning(disable : 4100)
 
-#include "common.h"
+#include "cmp_common.h"
 #include "compressonator.h"
 #include "codec_dxt1.h"
 

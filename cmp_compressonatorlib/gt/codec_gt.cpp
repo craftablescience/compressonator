@@ -29,7 +29,7 @@
 #pragma warning(disable : 4100)  // Ignore warnings of unreferenced formal parameters
 
 #ifdef _WIN32
-#include "common.h"
+#include "cmp_common.h"
 #include "codec_gt.h"
 #include <process.h>
 #include "debug.h"

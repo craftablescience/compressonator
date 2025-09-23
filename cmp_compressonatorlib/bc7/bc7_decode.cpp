@@ -30,7 +30,7 @@
 #include "bc7_decode.h"
 #include "bc7_utils.h"
 
-#include "common.h"
+#include "cmp_common.h"
 
 #ifdef TEST_CMP_CORE_DECODER
 #include "cmp_core.h"

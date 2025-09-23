@@ -39,7 +39,7 @@
 #include "codec.h"
 #include "codec_common.h"
 #include "cmp_mips.h"
-#include "common.h"
+#include "cmp_common.h"
 #include "compress.h"
 #include "debug.h"
 #include "format_conversion.h"

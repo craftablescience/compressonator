@@ -28,7 +28,7 @@
 //////////////////////////////////////////////////////////////////////////////
 #pragma warning(disable : 4100)
 
-#include "common.h"
+#include "cmp_common.h"
 #include "codec_etc2_rgba1.h"
 #include "compressonator_tc.h"
 #include "etcpack_lib.h"

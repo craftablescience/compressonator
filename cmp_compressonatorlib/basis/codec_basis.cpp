@@ -33,7 +33,7 @@
 #ifdef USE_BASIS
 
 #ifdef _WIN32
-#include "common.h"
+#include "cmp_common.h"
 #include "codec_basis.h"
 #include <process.h>
 #include "debug.h"

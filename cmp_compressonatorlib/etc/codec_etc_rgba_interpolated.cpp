@@ -22,7 +22,7 @@
 // THE SOFTWARE.
 //
 
-#include "common.h"  // napatel
+#include "cmp_common.h"  // napatel
 
 #ifdef SUPPORT_ETC_ALPHA
 

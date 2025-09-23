@@ -25,7 +25,7 @@
 #define _AMDFORMATS_H_
 
 #include "compressonator.h"
-#include "common.h"
+#include "cmp_common.h"
 
 typedef struct
 {

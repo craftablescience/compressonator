@@ -27,7 +27,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
-#include "common.h"
+#include "cmp_common.h"
 #include "codecbuffer_rgba2101010.h"
 #include "format_conversion.h"
 

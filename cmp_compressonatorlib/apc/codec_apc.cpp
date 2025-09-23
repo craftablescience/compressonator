@@ -31,7 +31,7 @@
 #ifdef _WIN32
 
 #include "codec_common.h"
-#include "common.h"
+#include "cmp_common.h"
 
 #ifdef USE_APC
 #include "codec_apc.h"

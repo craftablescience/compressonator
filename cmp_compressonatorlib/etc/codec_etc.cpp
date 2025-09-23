@@ -27,7 +27,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
-#include "common.h"
+#include "cmp_common.h"
 #include "codec_etc.h"
 #include "compressonator_tc.h"
 #include "compressonatorxcodec.h"
