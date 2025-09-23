@@ -46,66 +46,74 @@ endif()
 
 # Core SIMD options
 
-# Check architecture
-include(CheckCXXSourceCompiles)
-check_cxx_source_compiles("
-#if defined(__aarch64__) || defined(__arm__)
-int main() { return 0; }
-#else
-#error not arm64
-#endif
-" CMP_IS_ARM64)
-
-# SSE
-add_library(CMP_Core_SSE STATIC)
-target_sources(CMP_Core_SSE PRIVATE source/core_simd_sse.cpp)
-target_include_directories(CMP_Core_SSE PRIVATE source shaders)
-
-if (UNIX)
-    if (CMP_IS_ARM64)
-        target_compile_definitions(CMP_Core_SSE PRIVATE CMP_ARM64_BUILD)
-    else()
-        target_compile_options(CMP_Core_SSE PRIVATE -march=nehalem)
-    endif()
-endif()
-
-# AVX
-add_library(CMP_Core_AVX STATIC)
-target_sources(CMP_Core_AVX PRIVATE source/core_simd_avx.cpp)
-target_include_directories(CMP_Core_AVX PRIVATE source shaders)
-
-if (WIN32)
-    if (CMP_IS_ARM64)
-        target_compile_definitions(CMP_Core_AVX PRIVATE CMP_ARM64_BUILD)
-    else()
-        target_compile_options(CMP_Core_AVX PRIVATE /arch:AVX2)
-    endif()
+if(APPLE)
+    # Send me a patch that fixes these if you want SIMD because I do not care
+    target_sources(CMP_Core
+            PRIVATE
+            source/core_simd_apple.cpp
+    )
 else()
-    if (CMP_IS_ARM64)
-        target_compile_definitions(CMP_Core_AVX PRIVATE CMP_ARM64_BUILD)
-    else()
-        target_compile_options(CMP_Core_AVX PRIVATE -march=haswell)
+    # Check architecture
+    include(CheckCXXSourceCompiles)
+    check_cxx_source_compiles("
+    #if defined(__aarch64__) || defined(__arm__)
+    int main() { return 0; }
+    #else
+    #error not arm64
+    #endif
+    " CMP_IS_ARM64)
+
+    # SSE
+    add_library(CMP_Core_SSE STATIC)
+    target_sources(CMP_Core_SSE PRIVATE source/core_simd_sse.cpp)
+    target_include_directories(CMP_Core_SSE PRIVATE source shaders)
+
+    if (UNIX)
+        if (CMP_IS_ARM64)
+            target_compile_definitions(CMP_Core_SSE PRIVATE CMP_ARM64_BUILD)
+        else()
+            target_compile_options(CMP_Core_SSE PRIVATE -march=nehalem)
+        endif()
     endif()
+
+    # AVX
+    add_library(CMP_Core_AVX STATIC)
+    target_sources(CMP_Core_AVX PRIVATE source/core_simd_avx.cpp)
+    target_include_directories(CMP_Core_AVX PRIVATE source shaders)
+
+    if (WIN32)
+        if (CMP_IS_ARM64)
+            target_compile_definitions(CMP_Core_AVX PRIVATE CMP_ARM64_BUILD)
+        else()
+            target_compile_options(CMP_Core_AVX PRIVATE /arch:AVX2)
+        endif()
+    else()
+        if (CMP_IS_ARM64)
+            target_compile_definitions(CMP_Core_AVX PRIVATE CMP_ARM64_BUILD)
+        else()
+            target_compile_options(CMP_Core_AVX PRIVATE -march=haswell)
+        endif()
+    endif()
+
+    # AVX-512
+    add_library(CMP_Core_AVX512 STATIC)
+    target_sources(CMP_Core_AVX512 PRIVATE source/core_simd_avx512.cpp)
+    target_include_directories(CMP_Core_AVX512 PRIVATE source shaders)
+
+    if (WIN32)
+        if (CMP_IS_ARM64)
+            target_compile_definitions(CMP_Core_AVX512 PRIVATE CMP_ARM64_BUILD)
+        else()
+            target_compile_options(CMP_Core_AVX512 PRIVATE /arch:AVX-512)
+        endif()
+    else()
+        if (CMP_IS_ARM64)
+            target_compile_definitions(CMP_Core_AVX512 PRIVATE CMP_ARM64_BUILD)
+        else()
+            target_compile_options(CMP_Core_AVX512 PRIVATE -mavx512f)
+        endif()
+    endif()
+
+    # Link SIMD libraries to CMP_Core
+    target_link_libraries(CMP_Core PRIVATE CMP_Core_SSE CMP_Core_AVX CMP_Core_AVX512)
 endif()
-
-# AVX-512
-add_library(CMP_Core_AVX512 STATIC)
-target_sources(CMP_Core_AVX512 PRIVATE source/core_simd_avx512.cpp)
-target_include_directories(CMP_Core_AVX512 PRIVATE source shaders)
-
-if (WIN32)
-    if (CMP_IS_ARM64)
-        target_compile_definitions(CMP_Core_AVX512 PRIVATE CMP_ARM64_BUILD)
-    else()
-        target_compile_options(CMP_Core_AVX512 PRIVATE /arch:AVX-512)
-    endif()
-else()
-    if (CMP_IS_ARM64)
-        target_compile_definitions(CMP_Core_AVX512 PRIVATE CMP_ARM64_BUILD)
-    else()
-        target_compile_options(CMP_Core_AVX512 PRIVATE -mavx512f)
-    endif()
-endif()
-
-# Link SIMD libraries to CMP_Core
-target_link_libraries(CMP_Core PRIVATE CMP_Core_SSE CMP_Core_AVX CMP_Core_AVX512)
