@@ -1378,7 +1378,7 @@ void Partition(CMP_DWORD partition,
                int       dimension)
 {
     int        i, j;
-    CMP_DWORD* table = NULL;
+    CMP_DWORD* table = nullptr;
 
     for (i = 0; i < MAX_SUBSETS; i++)
     {
@@ -1409,7 +1409,7 @@ void Partition(CMP_DWORD partition,
         break;
     }
 
-    if (table == NULL)
+    if (table == nullptr)
         return;  // Nothing to do!!
 
 #ifdef USE_DBGTRACE

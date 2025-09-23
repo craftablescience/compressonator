@@ -130,7 +130,7 @@ static const CMP_DWORD TEXTURE_TYPE_DESC_COUNT = sizeof(g_TextureTypeDesc) / siz
 
 CMP_FORMAT CMP_API CMP_ParseFormat(char* pFormat)
 {
-    if (pFormat == NULL)
+    if (pFormat == nullptr)
         return CMP_FORMAT_Unknown;
 
     char pszFormat[128];
@@ -788,7 +788,7 @@ static CMP_FORMAT GetFormat(CMP_DWORD dwFourCC)
 CMP_FORMAT GetFormat(MipSet* pMipSet)
 {
     assert(pMipSet);
-    if (pMipSet == NULL)
+    if (pMipSet == nullptr)
         return CMP_FORMAT_Unknown;
 
     switch (pMipSet->m_ChannelFormat)

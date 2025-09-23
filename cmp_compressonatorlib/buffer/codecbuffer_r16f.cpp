@@ -51,7 +51,7 @@ CCodecBuffer_R16F::CCodecBuffer_R16F(CMP_BYTE  nBlockWidth,
     if (m_dwPitch <= GetWidth() * nPixelSize)
         m_dwPitch = GetWidth() * nPixelSize;
 
-    if (m_pData == NULL)
+    if (m_pData == nullptr)
     {
         CMP_DWORD dwSize = m_dwPitch * GetHeight();
         m_pData          = (CMP_BYTE*)malloc(dwSize);

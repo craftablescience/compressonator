@@ -35,7 +35,7 @@
     if (p)             \
     {                  \
         delete p;      \
-        p = NULL;      \
+        p = nullptr;   \
     }
 
 typedef float CODECFLOAT;
@@ -94,13 +94,13 @@ public:
     virtual CodecError Compress(CCodecBuffer&       bufferIn,
                                 CCodecBuffer&       bufferOut,
                                 Codec_Feedback_Proc pFeedbackProc = nullptr,
-                                CMP_DWORD_PTR       pUser1        = nullptr,
-                                CMP_DWORD_PTR       pUser2        = nullptr)   = 0;
+                                CMP_DWORD_PTR       pUser1        = 0,
+                                CMP_DWORD_PTR       pUser2        = 0)   = 0;
     virtual CodecError Decompress(CCodecBuffer&       bufferIn,
                                   CCodecBuffer&       bufferOut,
                                   Codec_Feedback_Proc pFeedbackProc = nullptr,
-                                  CMP_DWORD_PTR       pUser1        = nullptr,
-                                  CMP_DWORD_PTR       pUser2        = nullptr) = 0;
+                                  CMP_DWORD_PTR       pUser1        = 0,
+                                  CMP_DWORD_PTR       pUser2        = 0) = 0;
 
 protected:
     CodecType m_CodecType;

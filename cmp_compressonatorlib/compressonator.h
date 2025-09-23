@@ -44,7 +44,7 @@ typedef uint32_t DWORD;
 typedef int32_t  LONG;
 typedef bool     BOOL;
 #ifdef __linux__
-typedef int32_t* DWORD_PTR;
+typedef uint32_t* DWORD_PTR;
 #else
 typedef size_t DWORD_PTR;
 #endif

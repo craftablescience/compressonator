@@ -99,7 +99,7 @@ CCodec_BC6H::CCodec_BC6H(CodecType codecType)
     // Internal setting
     m_LibraryInitialized   = false;
     m_NumEncodingThreads   = 0;  // new auto setting to use max processors * 2 threads
-    m_EncodingThreadHandle = NULL;
+    m_EncodingThreadHandle = nullptr;
     m_LiveThreads          = 0;
     m_LastThread           = 0;
     m_CodecType            = codecType;
@@ -107,7 +107,7 @@ CCodec_BC6H::CCodec_BC6H(CodecType codecType)
 
 bool CCodec_BC6H::SetParameter(const CMP_CHAR* pszParamName, CMP_CHAR* sValue)
 {
-    if (sValue == NULL)
+    if (sValue == nullptr)
         return false;
 
     if (strcmp(pszParamName, "ModeMask") == 0)
@@ -168,7 +168,7 @@ CCodec_BC6H::~CCodec_BC6H()
 #pragma warning(disable : 4127)  //warning C4127: conditional expression is constant
         while (1)
         {
-            if (m_EncodeParameterStorage == NULL)
+            if (m_EncodeParameterStorage == nullptr)
                 break;
             if (m_EncodeParameterStorage[i].run != TRUE)
             {
@@ -177,11 +177,11 @@ CCodec_BC6H::~CCodec_BC6H()
         }
 #pragma warning(pop)
         // Signal to the thread that it can exit 
-        if (m_EncodeParameterStorage != NULL)
+        if (m_EncodeParameterStorage != nullptr)
             m_EncodeParameterStorage[i].exit = TRUE;
     }
 
-    if (m_EncodingThreadHandle != NULL)
+    if (m_EncodingThreadHandle != nullptr)
     {
         for (DWORD dwThread = 0; dwThread < m_LiveThreads; dwThread++)
         {
@@ -198,13 +198,13 @@ CCodec_BC6H::~CCodec_BC6H()
 
         // Clear storage of threads
         delete[] m_EncodingThreadHandle;
-        m_EncodingThreadHandle = NULL;
+        m_EncodingThreadHandle = nullptr;
     }
 
     if (m_EncodeParameterStorage)
     {
         delete[] m_EncodeParameterStorage;
-        m_EncodeParameterStorage = NULL;
+        m_EncodeParameterStorage = nullptr;
     }
 
     // Delete encoders
@@ -213,14 +213,14 @@ CCodec_BC6H::~CCodec_BC6H()
         if (m_encoder[i])
         {
             delete m_encoder[i];
-            m_encoder[i] = NULL;
+            m_encoder[i] = nullptr;
         }
     }
 
     if (m_decoder)
     {
         delete m_decoder;
-        m_decoder = NULL;
+        m_decoder = nullptr;
     }
 
     m_LibraryInitialized = false;
@@ -233,7 +233,7 @@ CodecError CCodec_BC6H::CInitializeBC6HLibrary()
 
     for (DWORD i = 0; i < BC6H_MAX_THREADS; i++)
     {
-        m_encoder[i] = NULL;
+        m_encoder[i] = nullptr;
     }
 
     // Create threaded encoder instances
@@ -263,7 +263,7 @@ CodecError CCodec_BC6H::CInitializeBC6HLibrary()
     if (!m_EncodingThreadHandle)
     {
         delete[] m_EncodeParameterStorage;
-        m_EncodeParameterStorage = NULL;
+        m_EncodeParameterStorage = nullptr;
 
         return CE_Unknown;
     }
@@ -291,17 +291,17 @@ CodecError CCodec_BC6H::CInitializeBC6HLibrary()
         {
             if (m_EncodeParameterStorage)
                 delete[] m_EncodeParameterStorage;
-            m_EncodeParameterStorage = NULL;
+            m_EncodeParameterStorage = nullptr;
 
             if (m_EncodingThreadHandle)
                 delete[] m_EncodingThreadHandle;
-            m_EncodingThreadHandle = NULL;
+            m_EncodingThreadHandle = nullptr;
 
             for (int j = 0; j < i; j++)
             {
                 if (m_encoder[j])
                     delete m_encoder[j];
-                m_encoder[j] = NULL;
+                m_encoder[j] = nullptr;
             }
 
             return CE_Unknown;
@@ -333,7 +333,7 @@ CodecError CCodec_BC6H::CInitializeBC6HLibrary()
         for (CMP_INT j = 0; j < m_NumEncodingThreads; j++)
         {
             delete m_encoder[j];
-            m_encoder[j] = NULL;
+            m_encoder[j] = nullptr;
         }
         return CE_Unknown;
     }
@@ -418,7 +418,7 @@ CodecError CCodec_BC6H::CFinishBC6HEncoding(void)
 }
 
 #ifdef BC6H_DEBUG_TO_RESULTS_TXT
-FILE* g_fp   = NULL;
+FILE* g_fp   = nullptr;
 int   g_mode = 0;
 #endif
 

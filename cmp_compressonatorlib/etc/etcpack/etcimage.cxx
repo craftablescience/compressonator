@@ -400,7 +400,7 @@ bool fWriteTGAfromRGBandA(char *filename, int width, int height, unsigned char *
 {
     FILE *f1;
 
-    if( (f1 = fopen(filename,"wb")) == NULL)
+    if( (f1 = fopen(filename,"wb")) == nullptr)
     {
         return false;
     }

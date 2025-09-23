@@ -44,7 +44,7 @@
 #define DISABLE_FP_EXCEPTIONS    \
     unsigned int nCurrentFP = 0; \
     _controlfp_s(&nCurrentFP, FP_EXCEPTION_MASK, _MCW_EM);
-#define RESTORE_FP_EXCEPTIONS _controlfp_s(NULL, nCurrentFP, _MCW_EM);
+#define RESTORE_FP_EXCEPTIONS _controlfp_s(nullptr, nCurrentFP, _MCW_EM);
 #endif  // >= 1400
 #else
 #define DISABLE_FP_EXCEPTIONS

@@ -64,7 +64,7 @@ int BC6HBlockEncoder::FindPattern();
 
 void SaveDataBlock(AMD_BC6H_Format bc6h_format, BYTE out[BC6H_COMPRESSED_BLOCK_SIZE])
 {
-    BitHeader header(NULL, BC6H_COMPRESSED_BLOCK_SIZE);
+    BitHeader header(nullptr, BC6H_COMPRESSED_BLOCK_SIZE);
 
     // Save the RGB end point values
     switch (bc6h_format.m_mode)

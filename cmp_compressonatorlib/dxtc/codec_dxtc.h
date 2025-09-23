@@ -63,12 +63,12 @@ protected:
     virtual CodecError CompressExplicitAlphaBlock(CMP_BYTE alphaBlock[BLOCK_SIZE_4X4], CMP_DWORD compressedBlock[2]);
     virtual CodecError CompressRGBBlock(CMP_BYTE    rgbBlock[BLOCK_SIZE_4X4X4],
                                         CMP_DWORD   compressedBlock[2],
-                                        CODECFLOAT* pfChannelWeights    = NULL,
+                                        CODECFLOAT* pfChannelWeights    = nullptr,
                                         bool        bDXT1               = false,
                                         bool        bDXT1UseAlpha       = false,
                                         CMP_BYTE    nDXT1AlphaThreshold = 0);
-    virtual CodecError CompressRGBABlock(CMP_BYTE rgbaBlock[BLOCK_SIZE_4X4X4], CMP_DWORD compressedBlock[4], CODECFLOAT* pfChannelWeights = NULL);
-    virtual CodecError CompressRGBABlock_ExplicitAlpha(CMP_BYTE rgbaBlock[BLOCK_SIZE_4X4X4], CMP_DWORD compressedBlock[4], CODECFLOAT* pfChannelWeights = NULL);
+    virtual CodecError CompressRGBABlock(CMP_BYTE rgbaBlock[BLOCK_SIZE_4X4X4], CMP_DWORD compressedBlock[4], CODECFLOAT* pfChannelWeights = nullptr);
+    virtual CodecError CompressRGBABlock_ExplicitAlpha(CMP_BYTE rgbaBlock[BLOCK_SIZE_4X4X4], CMP_DWORD compressedBlock[4], CODECFLOAT* pfChannelWeights = nullptr);
 
     virtual CodecError CompressAlphaBlock_Fast(CMP_BYTE alphaBlock[BLOCK_SIZE_4X4], CMP_DWORD compressedBlock[2]);
     virtual CodecError CompressExplicitAlphaBlock_Fast(CMP_BYTE alphaBlock[BLOCK_SIZE_4X4], CMP_DWORD compressedBlock[2]);
@@ -83,12 +83,12 @@ protected:
     virtual CodecError CompressExplicitAlphaBlock(CODECFLOAT alphaBlock[BLOCK_SIZE_4X4], CMP_DWORD compressedBlock[2]);
     virtual CodecError CompressRGBBlock(CODECFLOAT  rgbBlock[BLOCK_SIZE_4X4X4],
                                         CMP_DWORD   compressedBlock[2],
-                                        CODECFLOAT* pfChannelWeights    = NULL,
+                                        CODECFLOAT* pfChannelWeights    = nullptr,
                                         bool        bDXT1               = false,
                                         bool        bDXT1UseAlpha       = false,
                                         CODECFLOAT  fDXT1AlphaThreshold = 0.0);
-    virtual CodecError CompressRGBABlock(CODECFLOAT rgbaBlock[BLOCK_SIZE_4X4X4], CMP_DWORD compressedBlock[4], CODECFLOAT* pfChannelWeights = NULL);
-    virtual CodecError CompressRGBABlock_ExplicitAlpha(CODECFLOAT rgbaBlock[BLOCK_SIZE_4X4], CMP_DWORD compressedBlock[4], CODECFLOAT* pfChannelWeights = NULL);
+    virtual CodecError CompressRGBABlock(CODECFLOAT rgbaBlock[BLOCK_SIZE_4X4X4], CMP_DWORD compressedBlock[4], CODECFLOAT* pfChannelWeights = nullptr);
+    virtual CodecError CompressRGBABlock_ExplicitAlpha(CODECFLOAT rgbaBlock[BLOCK_SIZE_4X4], CMP_DWORD compressedBlock[4], CODECFLOAT* pfChannelWeights = nullptr);
 
     virtual void DecompressAlphaBlock(CMP_BYTE alphaBlock[BLOCK_SIZE_4X4], CMP_DWORD compressedBlock[2]);
 

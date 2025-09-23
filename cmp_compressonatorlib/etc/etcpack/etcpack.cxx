@@ -305,8 +305,8 @@ int indexConversion(int pixelIndices)
 // NO WARRANTY --- SEE STATEMENT IN TOP OF FILE (C) Ericsson AB 2005-2013. All Rights Reserved.
 bool fileExist(char *filename)
 {
-    FILE *f=NULL;
-    if((f=fopen(filename,"rb"))!=NULL)
+    FILE *f=nullptr;
+    if((f=fopen(filename,"rb"))!=nullptr)
     {
         fclose(f);
         return true;
@@ -9525,8 +9525,8 @@ void uncompressFile(char *srcfile, uint8* &img, uint8 *&alphaimg, int& active_wi
             {
                 free(alphaimg);
                 free(alphaimg2);
-        alphaimg = NULL;
-        alphaimg2 = NULL;
+        alphaimg = nullptr;
+        alphaimg2 = nullptr;
             }
         }
     }
@@ -9616,7 +9616,7 @@ void writeOutputFile(char *dstfile, uint8* img, uint8* alphaimg, int width, int 
     system(str);
     
     free(img);
-    if(alphaimg!=NULL)
+    if(alphaimg!=nullptr)
         free(alphaimg);
 }
 
@@ -16051,7 +16051,7 @@ void compressFile(char *srcfile,char *dstfile)
         if(format==ETC2PACKAGE_R_NO_MIPMAPS||readSrcFile(srcfile,srcimg,width,height,extendedwidth, extendedheight))
         {
             //make sure that alphasrcimg contains the alpha channel or is null here, and pass it to compressimagefile
-            uint8* alphaimg=NULL;
+            uint8* alphaimg=nullptr;
             if(format==ETC2PACKAGE_RGBA_NO_MIPMAPS||format==ETC2PACKAGE_RGBA1_NO_MIPMAPS||format==ETC2PACKAGE_sRGBA_NO_MIPMAPS||format==ETC2PACKAGE_sRGBA1_NO_MIPMAPS) 
             {
                 char str[300];
@@ -16142,7 +16142,7 @@ int main(int argc,char *argv[])
         if(mode==MODE_UNCOMPRESS)
         {
             printf("Decompressing .pkm/.ktx file ...\n");
-            uint8* alphaimg=NULL, *img;
+            uint8* alphaimg=nullptr, *img;
             int w, h;
             uncompressFile(srcfile,img,alphaimg,w,h);
             writeOutputFile(dstfile,img,alphaimg,w,h);

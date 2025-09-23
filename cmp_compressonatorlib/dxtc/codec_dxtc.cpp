@@ -62,7 +62,7 @@ CCodec_DXTC::~CCodec_DXTC()
 
 bool CCodec_DXTC::SetParameter(const CMP_CHAR* pszParamName, CMP_CHAR* sValue)
 {
-    if (sValue == NULL)
+    if (sValue == nullptr)
         return false;
     if (strcmp(pszParamName, "UseChannelWeighting") == 0)
     {

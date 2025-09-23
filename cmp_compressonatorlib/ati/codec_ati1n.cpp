@@ -357,7 +357,7 @@ CodecError CCodec_ATI1N_S::Decompress(CCodecBuffer&       bufferIn,
             bufferIn.ReadBlock(i * 4, j * 4, compressedBlock, 2);
 #ifdef TEST_CMP_CORE_DECODER
             CMP_BYTE ATI1NBlock[BLOCK_SIZE_4X4];
-            DecompressAlphaBlockInt8((const int8_t*)compressedBlock, (int8_t*)ATI1NBlock, NULL);
+            DecompressAlphaBlockInt8((const int8_t*)compressedBlock, (int8_t*)ATI1NBlock, nullptr);
 
             bufferOut.WriteBlockR(i * 4, j * 4, 4, 4, ATI1NBlock);
             bufferOut.WriteBlockG(i * 4, j * 4, 4, 4, ATI1NBlock);

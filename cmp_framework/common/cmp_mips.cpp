@@ -32,7 +32,7 @@
 #include <stdio.h>
 #include <assert.h>
 
-void (*PrintStatusLine)(char*) = NULL;
+void (*PrintStatusLine)(char*) = nullptr;
 
 void PrintInfo(const char* Format, ...)
 {
@@ -812,27 +812,27 @@ CMP_MipLevel* CMP_CMIPS::GetMipLevel(const CMP_MipSet* pMipSet, int nMipLevel, i
     if (!pMipSet)
     {
         assert(pMipSet);
-        return NULL;
+        return nullptr;
     }
 
     if (!pMipSet->m_pMipLevelTable)
     {
-        return NULL;
+        return nullptr;
     }
 
     if (nMipLevel > MAX_MIPLEVEL_SUPPORTED)
     {
-        return NULL;
+        return nullptr;
     }
 
     if (nMipLevel > pMipSet->m_nMaxMipLevels)
     {
         assert(nMipLevel <= pMipSet->m_nMaxMipLevels);
-        return NULL;
+        return nullptr;
     }
     if (nFaceOrSlice < 0)
     {
-        return NULL;  //not an error, indicates requested face doesn't exist
+        return nullptr;  //not an error, indicates requested face doesn't exist
     }
     int nDepth = pMipSet->m_nDepth, index = 0, whichMipLevel = 0;
 
@@ -842,14 +842,14 @@ CMP_MipLevel* CMP_CMIPS::GetMipLevel(const CMP_MipSet* pMipSet, int nMipLevel, i
     case TT_2D:
         if (nFaceOrSlice != 0)
         {
-            return NULL;
+            return nullptr;
         }
         return (pMipSet->m_pMipLevelTable)[nMipLevel];
     case TT_CubeMap:
         if (nFaceOrSlice > 6)
         {  //cubemap have at most 6 faces
             assert(nFaceOrSlice > 6);
-            return NULL;
+            return nullptr;
         }
         return (pMipSet->m_pMipLevelTable)[nMipLevel * nDepth + nFaceOrSlice];
     case TT_VolumeTexture:
@@ -866,10 +866,10 @@ CMP_MipLevel* CMP_CMIPS::GetMipLevel(const CMP_MipSet* pMipSet, int nMipLevel, i
                 nDepth = nDepth > 1 ? nDepth >> 1 : 1;
             }
         }
-        return NULL;
+        return nullptr;
     default:
         assert(0);
-        return NULL;
+        return nullptr;
     }
 }
 
@@ -937,7 +937,7 @@ bool CMP_CMIPS::AllocateMipLevelTable(CMP_MipLevelTable** ppMipLevelTable, int n
     //allocate the mipLevelTable (buncha pointers to miplevels)
     *ppMipLevelTable = reinterpret_cast<CMP_MipLevelTable*>(calloc(nLevelsToAllocate, sizeof(CMP_MipLevel*)));
     assert(*ppMipLevelTable);
-    return (*ppMipLevelTable != NULL);
+    return (*ppMipLevelTable != nullptr);
 }
 
 bool CMP_CMIPS::AllocateAllMipLevels(CMP_MipLevelTable* pMipLevelTable, CMP_TextureType /*textureType*/, int nLevelsToAllocate)
@@ -957,7 +957,7 @@ bool CMP_CMIPS::AllocateAllMipLevels(CMP_MipLevelTable* pMipLevelTable, CMP_Text
                 if (pMipLevelTable[j])
                 {
                     free(pMipLevelTable[j]);
-                    pMipLevelTable[j] = NULL;
+                    pMipLevelTable[j] = nullptr;
                 }
             }
 
@@ -1011,7 +1011,7 @@ bool CMP_CMIPS::AllocateMipSet(CMP_MipSet*       pMipSet,
         if (pMipSet->m_pMipLevelTable)
         {
             free(pMipSet->m_pMipLevelTable);
-            pMipSet->m_pMipLevelTable = NULL;
+            pMipSet->m_pMipLevelTable = nullptr;
         }
         return false;
     }
@@ -1079,7 +1079,7 @@ bool CMP_CMIPS::AllocateMipLevelData(CMP_MipLevel* pMipLevel, int nWidth, int nH
 
     pMipLevel->m_pbData = reinterpret_cast<CMP_BYTE*>(malloc(pMipLevel->m_dwLinearSize));
 
-    return (pMipLevel->m_pbData != NULL);
+    return (pMipLevel->m_pbData != nullptr);
 }
 
 bool CMP_CMIPS::AllocateCompressedMipLevelData(CMP_MipLevel* pMipLevel, int nWidth, int nHeight, CMP_DWORD dwSize)
@@ -1094,7 +1094,7 @@ bool CMP_CMIPS::AllocateCompressedMipLevelData(CMP_MipLevel* pMipLevel, int nWid
 
     pMipLevel->m_pbData = reinterpret_cast<CMP_BYTE*>(malloc(pMipLevel->m_dwLinearSize));
 
-    return (pMipLevel->m_pbData != NULL);
+    return (pMipLevel->m_pbData != nullptr);
 }
 
 void CMP_CMIPS::FreeMipLevelData(CMP_MipLevel* pMipLevel)
@@ -1105,7 +1105,7 @@ void CMP_CMIPS::FreeMipLevelData(CMP_MipLevel* pMipLevel)
     if (pMipLevel->m_pbData)
     {
         free(pMipLevel->m_pbData);
-        pMipLevel->m_pbData = NULL;
+        pMipLevel->m_pbData = nullptr;
     }
 }
 
@@ -1120,7 +1120,7 @@ void CMP_CMIPS::FreeMipLevelData(CMP_MipLevel* pMipLevel, CMP_FORMAT setFormat)
     if (setFormat == CMP_FORMAT_BASIS)
     {
         delete pMipLevel->m_pvec8Data;
-        pMipLevel->m_pvec8Data = NULL;
+        pMipLevel->m_pvec8Data = nullptr;
         return;
     }
 
@@ -1167,12 +1167,12 @@ void CMP_CMIPS::FreeMipSet(CMP_MipSet* pMipSet)
                     FreeMipLevelData(pMipSet->m_pMipLevelTable[i], pMipSet->m_format);
                     // Free the MipLevel structure itself
                     free(pMipSet->m_pMipLevelTable[i]);
-                    pMipSet->m_pMipLevelTable[i] = NULL;
+                    pMipSet->m_pMipLevelTable[i] = nullptr;
                 }
             }
 
             free(pMipSet->m_pMipLevelTable);
-            pMipSet->m_pMipLevelTable = NULL;
+            pMipSet->m_pMipLevelTable = nullptr;
             pMipSet->m_nMaxMipLevels  = 0;
             pMipSet->m_nMipLevels     = 0;
         }

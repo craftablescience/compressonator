@@ -41,7 +41,7 @@ CODECFLOAT CompRGBBlock(CODECFLOAT* block_32,
                         bool        _bUseSSE2,
                         bool        b3DRefinement,
                         CMP_BYTE    nRefinementSteps,
-                        CODECFLOAT* _pfChannelWeights = NULL,
+                        CODECFLOAT* _pfChannelWeights = nullptr,
                         bool        _bUseAlpha        = false,
                         CODECFLOAT  _fAlphaThreshold  = 0.5);
 
@@ -57,7 +57,7 @@ CODECFLOAT CompRGBBlock(CMP_DWORD*  block_32,
                         bool        _bUseSSE2,
                         bool        b3DRefinement,
                         CMP_BYTE    nRefinementSteps,
-                        CODECFLOAT* _pfChannelWeights = NULL,
+                        CODECFLOAT* _pfChannelWeights = nullptr,
                         bool        _bUseAlpha        = false,
                         CMP_BYTE    _nAlphaThreshold  = 128);
 

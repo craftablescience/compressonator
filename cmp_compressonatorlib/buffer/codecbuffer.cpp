@@ -131,7 +131,7 @@ CCodecBuffer* CreateCodecBuffer(CodecBufferType nCodecBufferType,
     case CBT_Unknown:
     default:
         assert(0);
-        return NULL;
+        return nullptr;
     }
 }
 
@@ -252,7 +252,7 @@ CCodecBuffer::CCodecBuffer(CMP_BYTE  nBlockWidth,
     m_nBlockDepth  = nBlockDepth < 1 ? 1 : nBlockDepth;
 
     m_pData            = pData;
-    m_bUserAllocedData = (pData != NULL);
+    m_bUserAllocedData = (pData != nullptr);
     m_DataSize         = dwDataSize;
 
     m_bPerformingConversion = false;
@@ -270,7 +270,7 @@ CCodecBuffer::~CCodecBuffer()
     if (m_pData && !m_bUserAllocedData)
     {
         free(m_pData);
-        m_pData = NULL;
+        m_pData = nullptr;
     }
 }
 

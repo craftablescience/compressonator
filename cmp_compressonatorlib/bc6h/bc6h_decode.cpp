@@ -235,7 +235,7 @@ int lerp(int a, int b, int i, int denom)
     assert(denom == 3 || denom == 7 || denom == 15);
     assert(i >= 0 && i <= denom);
 
-    int shift = 6, *weights = NULL;
+    int shift = 6, *weights = nullptr;
 
     switch (denom)
     {

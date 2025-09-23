@@ -1350,7 +1350,7 @@ void quant_AnD_Shell(double* v_, int k, int n, int* idx)
     double r = 0;
     int    mi;
 
-    assert((v_ != NULL) && (n > 1) && (k > 1));
+    assert((v_ != nullptr) && (n > 1) && (k > 1));
 
     double m, M, s, dm = 0.;
     m = M = v_[0];

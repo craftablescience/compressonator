@@ -86,10 +86,10 @@ public:
                                   GENERIC_READ |  // Read and write access
                                       GENERIC_WRITE,
                                   0,              // No sharing
-                                  NULL,           // Default security attributes
+                                  nullptr,        // Default security attributes
                                   OPEN_EXISTING,  // Opens existing pipe
                                   0,              // Default attributes
-                                  NULL);          // No template file
+                                  nullptr);       // No template file
 
             // Break if the pipe handle is valid.
             if (m_hPipe != INVALID_HANDLE_VALUE)
@@ -140,7 +140,7 @@ public:
             &m_data,                                       // Message to be written
             m_data.data_size + COMPRESS_DATA_HEADER_SIZE,  // Number of bytes to write
             &m_cbBytesWritten,                             // Number of bytes written
-            NULL);                                         // Not overlapped
+            nullptr);                                      // Not overlapped
 
         if (!m_bResult /*Failed*/ || (m_data.data_size + (DWORD)COMPRESS_DATA_HEADER_SIZE) != m_cbBytesWritten /*Failed*/)
         {
@@ -175,7 +175,7 @@ private:
                 &m_chReply,        // Buffer to receive the reply
                 m_cbReplyBytes,    // Size of buffer
                 &m_cbBytesRead,    // Number of bytes read
-                NULL);             // Not overlapped
+                nullptr);          // Not overlapped
 
             if (!m_bResult && GetLastError() != ERROR_MORE_DATA)
             {

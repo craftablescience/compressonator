@@ -252,6 +252,6 @@ CCodec* CreateCodec(CodecType nCodecType)
     case CT_Unknown:
     default:
         assert(0);
-        return NULL;
+        return nullptr;
     }
 }

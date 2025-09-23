@@ -44,14 +44,14 @@
 
 #ifdef USE_FILEIO
 #include <stdio.h>
-FILE* basis_File       = NULL;
+FILE* basis_File       = nullptr;
 int   basis_blockcount = 0;
 int   basis_total_MSE  = 0;
 #endif
 
 // New SDK interfaces used for using external runtime common encoder codec API's
-int (*BASIS_CompressTexture)(void* in, void* out, void* processOptions)   = NULL;
-int (*BASIS_DecompressTexture)(void* in, void* out, void* processOptions) = NULL;
+int (*BASIS_CompressTexture)(void* in, void* out, void* processOptions)   = nullptr;
+int (*BASIS_DecompressTexture)(void* in, void* out, void* processOptions) = nullptr;
 
 //////////////////////////////////////////////////////////////////////////////
 // Construction/Destruction
@@ -66,7 +66,7 @@ CCodec_BASIS::CCodec_BASIS()
 
 bool CCodec_BASIS::SetParameter(const CMP_CHAR* pszParamName, CMP_CHAR* sValue)
 {
-    if (sValue == NULL)
+    if (sValue == nullptr)
         return false;
 
     if (strcmp(pszParamName, "Quality") == 0)

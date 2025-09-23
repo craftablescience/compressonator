@@ -50,7 +50,7 @@ CCodec_DXT5_RBxG::~CCodec_DXT5_RBxG()
 
 bool CCodec_DXT5_RBxG::SetParameter(const CMP_CHAR* pszParamName, CMP_CHAR* sValue)
 {
-    if (sValue == NULL)
+    if (sValue == nullptr)
         return false;
     CODECFLOAT fValue = std::stof(sValue);
     if (strcmp(pszParamName, "WeightR") == 0)

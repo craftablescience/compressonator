@@ -674,7 +674,7 @@ void CCodec_DXTC::DecompressRGBBlock(CODECFLOAT rgbBlock[BLOCK_SIZE_4X4X4], CMP_
 CODECFLOAT* CCodec_DXTC::CalculateColourWeightings(CMP_BYTE block[BLOCK_SIZE_4X4X4])
 {
     if (!m_bUseChannelWeighting)
-        return NULL;
+        return nullptr;
 
     if (m_bUseAdaptiveWeighting)
     {
@@ -727,7 +727,7 @@ CODECFLOAT* CCodec_DXTC::CalculateColourWeightings(CMP_BYTE block[BLOCK_SIZE_4X4
 CODECFLOAT* CCodec_DXTC::CalculateColourWeightings(CODECFLOAT block[BLOCK_SIZE_4X4X4])
 {
     if (!m_bUseChannelWeighting)
-        return NULL;
+        return nullptr;
 
     if (m_bUseAdaptiveWeighting)
     {

@@ -66,7 +66,7 @@ public:
         // Cleanup print
         m_function = "";
         buff[0]    = '\0';
-        debug_File = NULL;
+        debug_File = nullptr;
     }
 
     // this is used for tracing functions :: with no parameters
@@ -96,7 +96,7 @@ protected:
     static unsigned long stacklevel;
     static unsigned long level;
 
-    FILE* debug_File = NULL;
+    FILE* debug_File = nullptr;
 
     void PrintMsg()
     {

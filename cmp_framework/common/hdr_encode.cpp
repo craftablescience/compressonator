@@ -66,7 +66,7 @@ float lerpf(float a, float b, int i, int denom) {
     assert(denom == 3 || denom == 7 || denom == 15);
     assert(i >= 0 && i <= denom);
 
-    int *weights = NULL;
+    int *weights = nullptr;
 
     switch (denom) {
     case 3:
@@ -1129,7 +1129,7 @@ void    Partition(
     int       ShapeTableToUse,
     int       dimension) {
     int   i, j;
-    int   *table = NULL;
+    int   *table = nullptr;
 
     // Dont use memset: this is better for now
     for (i = 0; i<MAX_SUBSETS; i++) count[i] = 0;
@@ -1147,7 +1147,7 @@ void    Partition(
     }
 
     // Nothing to do!!: Must indicate an error to user
-    if (table == NULL) return;
+    if (table == nullptr) return;
 
     for (i = 0; i<MAX_SUBSET_SIZE; i++) {
         int   subset = table[i];
@@ -1383,7 +1383,7 @@ void quant_AnD_Shell(float* v_, int k, int n, int *idx) {
     float r = 0;
     int mi;
 
-    //assert((v_ != NULL) && (n>1) && (k>1));
+    //assert((v_ != nullptr) && (n>1) && (k>1));
 
     float m, M, s, dm = 0.;
     m = M = v_[0];

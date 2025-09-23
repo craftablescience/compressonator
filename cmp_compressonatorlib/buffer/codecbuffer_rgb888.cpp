@@ -53,7 +53,7 @@ CCodecBuffer_RGB888::CCodecBuffer_RGB888(CMP_BYTE  nBlockWidth,
     if (m_dwPitch < dwMinPitch)
         m_dwPitch = dwMinPitch;
 
-    if (m_pData == NULL)
+    if (m_pData == nullptr)
     {
         m_DataSize = m_dwPitch * m_dwHeight;
         m_pData    = (CMP_BYTE*)calloc(1, m_DataSize);

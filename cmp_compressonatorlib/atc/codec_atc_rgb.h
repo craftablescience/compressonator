@@ -50,12 +50,12 @@ public:
     virtual CodecError Compress(CCodecBuffer&       bufferIn,
                                 CCodecBuffer&       bufferOut,
                                 Codec_Feedback_Proc pFeedbackProc = nullptr,
-                                CMP_DWORD_PTR       pUser1        = nullptr,
-                                CMP_DWORD_PTR       pUser2        = nullptr);
+                                CMP_DWORD_PTR       pUser1        = 0,
+                                CMP_DWORD_PTR       pUser2        = 0);
     virtual CodecError Decompress(CCodecBuffer&       bufferIn,
                                   CCodecBuffer&       bufferOut,
                                   Codec_Feedback_Proc pFeedbackProc = nullptr,
-                                  CMP_DWORD_PTR       pUser1        = nullptr,
-                                  CMP_DWORD_PTR       pUser2        = nullptr);
+                                  CMP_DWORD_PTR       pUser1        = 0,
+                                  CMP_DWORD_PTR       pUser2        = 0);
 };
 #endif  // !defined(_CODEC_ATC_RGB_H_INCLUDED_)

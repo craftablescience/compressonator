@@ -30,13 +30,13 @@ using namespace JML;
     {                      \
         if (x)             \
             delete x;      \
-        x = NULL;          \
+        x = nullptr;       \
     }
 #define JRT_SAFE_DELETE_ARRAY(x) \
     {                            \
         if (x)                   \
             delete[] x;          \
-        x = NULL;                \
+        x = nullptr;             \
     }
 
 #endif

@@ -45,7 +45,7 @@
 //======================================================================================
 #ifdef USE_FILEIO
 #include <stdio.h>
-FILE* bc7_File       = NULL;
+FILE* bc7_File       = nullptr;
 int   bc7_blockcount = 0;
 int   bc7_total_MSE  = 0;
 #endif
@@ -98,14 +98,14 @@ CCodec_BC7::CCodec_BC7()
 
     m_NumThreads           = 0;
     m_NumEncodingThreads   = m_NumThreads;
-    m_EncodingThreadHandle = NULL;
+    m_EncodingThreadHandle = nullptr;
     m_LiveThreads          = 0;
     m_LastThread           = 0;
 }
 
 bool CCodec_BC7::SetParameter(const CMP_CHAR* pszParamName, CMP_CHAR* sValue)
 {
-    if (sValue == NULL)
+    if (sValue == nullptr)
         return false;
 
     if (strcmp(pszParamName, "ModeMask") == 0)
@@ -216,25 +216,25 @@ CCodec_BC7::~CCodec_BC7()
 
     delete[] m_EncodingThreadHandle;
 
-    m_EncodingThreadHandle = NULL;
+    m_EncodingThreadHandle = nullptr;
 
     if (m_EncodeParameterStorage)
         delete[] m_EncodeParameterStorage;
-    m_EncodeParameterStorage = NULL;
+    m_EncodeParameterStorage = nullptr;
 
     for (int i = 0; i < m_NumEncodingThreads; i++)
     {
         if (m_encoder[i])
         {
             delete m_encoder[i];
-            m_encoder[i] = NULL;
+            m_encoder[i] = nullptr;
         }
     }
 
     if (m_decoder)
     {
         delete m_decoder;
-        m_decoder = NULL;
+        m_decoder = nullptr;
     }
 
     Quant_DeInit();
@@ -251,7 +251,7 @@ CodecError CCodec_BC7::InitializeBC7Library()
 
         for (CMP_DWORD i = 0; i < MAX_BC7_THREADS; i++)
         {
-            m_encoder[i] = NULL;
+            m_encoder[i] = nullptr;
         }
 
         // Create threaded encoder instances
@@ -279,7 +279,7 @@ CodecError CCodec_BC7::InitializeBC7Library()
         if (!m_EncodingThreadHandle)
         {
             delete[] m_EncodeParameterStorage;
-            m_EncodeParameterStorage = NULL;
+            m_EncodeParameterStorage = nullptr;
 
             return CE_Unknown;
         }
@@ -295,15 +295,15 @@ CodecError CCodec_BC7::InitializeBC7Library()
             if (!m_encoder[i])
             {
                 delete[] m_EncodeParameterStorage;
-                m_EncodeParameterStorage = NULL;
+                m_EncodeParameterStorage = nullptr;
 
                 delete[] m_EncodingThreadHandle;
-                m_EncodingThreadHandle = NULL;
+                m_EncodingThreadHandle = nullptr;
 
                 for (CMP_INT j = 0; j < i; j++)
                 {
                     delete m_encoder[j];
-                    m_encoder[j] = NULL;
+                    m_encoder[j] = nullptr;
                 }
 
                 return CE_Unknown;
@@ -335,7 +335,7 @@ CodecError CCodec_BC7::InitializeBC7Library()
             for (CMP_INT j = 0; j < m_NumEncodingThreads; j++)
             {
                 delete m_encoder[j];
-                m_encoder[j] = NULL;
+                m_encoder[j] = nullptr;
             }
             return CE_Unknown;
         }
@@ -365,7 +365,7 @@ CodecError CCodec_BC7::EncodeBC7Block(double in[BC7_BLOCK_PIXELS][MAX_DIMENSION_
         threadIndex    = m_LastThread;
         while (found == FALSE)
         {
-            if (m_EncodeParameterStorage == NULL)
+            if (m_EncodeParameterStorage == nullptr)
                 return CE_Unknown;
 
             if (m_EncodeParameterStorage[threadIndex].run == FALSE)
@@ -438,8 +438,8 @@ bool cmp_bc7_progress_update(false);
 
 CMP_PROGRESS_THREAD CCodec_BC7::m_progress           = {0.0f, false};
 Codec_Feedback_Proc CCodec_BC7::m_user_pFeedbackProc = nullptr;
-CMP_DWORD_PTR       CCodec_BC7::m_pUser1             = NULL;
-CMP_DWORD_PTR       CCodec_BC7::m_pUser2             = NULL;
+CMP_DWORD_PTR       CCodec_BC7::m_pUser1             = nullptr;
+CMP_DWORD_PTR       CCodec_BC7::m_pUser2             = nullptr;
 
 // Used by a none-blocking thread while compresion is in progress!
 void CCodec_BC7::Run()
@@ -694,7 +694,7 @@ CodecError CCodec_BC7::Compress(CCodecBuffer& bufferIn, CCodecBuffer& bufferOut,
             bc7_blockcount = 1;
         fprintf(bc7_File, "Total MSE %6d AVG_MSE %6d\n\n", bc7_total_MSE, bc7_total_MSE / bc7_blockcount);
         fclose(bc7_File);
-        bc7_File = NULL;
+        bc7_File = nullptr;
     }
 #endif
 #ifdef BC7_COMPDEBUGGER

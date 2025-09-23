@@ -52,7 +52,7 @@ CCodecBuffer_RGBA16F::CCodecBuffer_RGBA16F(CMP_BYTE  nBlockWidth,
     if (m_dwPitch <= GetWidth() * RGBA16F_nPixelSize)
         m_dwPitch = GetWidth() * RGBA16F_nPixelSize;
 
-    if (m_pData == NULL)
+    if (m_pData == nullptr)
     {
         CMP_DWORD dwSize = m_dwPitch * GetHeight();
         m_pData          = (CMP_BYTE*)malloc(dwSize);

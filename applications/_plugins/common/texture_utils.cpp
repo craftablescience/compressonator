@@ -103,7 +103,7 @@ CMP_DWORD CalcBufferSize(CMP_FORMAT format, CMP_DWORD dwWidth, CMP_DWORD dwHeigh
 
 CMP_DWORD CMP_API CMP_CalculateBufferSize(const CMP_Texture* texture)
 {
-    if (texture == NULL)
+    if (texture == nullptr)
         return 0;
 
     if (texture->dwSize != sizeof(CMP_Texture))
@@ -138,10 +138,10 @@ CMP_DWORD CMP_API CMP_CalculateBufferSize(const CMP_Texture* texture)
 
 CMP_ERROR CheckTexture(const CMP_Texture* pTexture, bool bSource)
 {
-    if (pTexture == NULL)
+    if (pTexture == nullptr)
         return (bSource ? CMP_ERR_INVALID_SOURCE_TEXTURE : CMP_ERR_INVALID_DEST_TEXTURE);
 
-    if (pTexture->pData == NULL)
+    if (pTexture->pData == nullptr)
         return (bSource ? CMP_ERR_INVALID_SOURCE_TEXTURE : CMP_ERR_INVALID_DEST_TEXTURE);
 
     if (pTexture->dwSize != sizeof(CMP_Texture))

@@ -117,7 +117,7 @@ CCodecBuffer_Block::CCodecBuffer_Block(CodecBufferType nCodecBufferType,
     m_dwBlockSize       = m_dwBlockWidth * m_dwBlockHeight * m_dwBlockBPP / 8;
     m_dwPitch           = dwBlocksX * m_dwBlockSize;
 
-    if (m_pData == NULL)
+    if (m_pData == nullptr)
     {
         CMP_DWORD dwSize = dwBlocks * m_dwBlockSize;
         m_pData          = (CMP_BYTE*)malloc(dwSize);

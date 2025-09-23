@@ -44,24 +44,24 @@ public:
 
     virtual CodecError Compress(CCodecBuffer&       bufferIn,
                                 CCodecBuffer&       bufferOut,
-                                Codec_Feedback_Proc pFeedbackProc = NULL,
-                                CMP_DWORD_PTR       pUser1        = NULL,
-                                CMP_DWORD_PTR       pUser2        = NULL);
+                                Codec_Feedback_Proc pFeedbackProc = nullptr,
+                                CMP_DWORD_PTR       pUser1        = 0,
+                                CMP_DWORD_PTR       pUser2        = 0);
     virtual CodecError Compress_Fast(CCodecBuffer&       bufferIn,
                                      CCodecBuffer&       bufferOut,
-                                     Codec_Feedback_Proc pFeedbackProc = NULL,
-                                     CMP_DWORD_PTR       pUser1        = NULL,
-                                     CMP_DWORD_PTR       pUser2        = NULL);
+                                     Codec_Feedback_Proc pFeedbackProc = nullptr,
+                                     CMP_DWORD_PTR       pUser1        = 0,
+                                     CMP_DWORD_PTR       pUser2        = 0);
     virtual CodecError Compress_SuperFast(CCodecBuffer&       bufferIn,
                                           CCodecBuffer&       bufferOut,
-                                          Codec_Feedback_Proc pFeedbackProc = NULL,
-                                          CMP_DWORD_PTR       pUser1        = NULL,
-                                          CMP_DWORD_PTR       pUser2        = NULL);
+                                          Codec_Feedback_Proc pFeedbackProc = nullptr,
+                                          CMP_DWORD_PTR       pUser1        = 0,
+                                          CMP_DWORD_PTR       pUser2        = 0);
     virtual CodecError Decompress(CCodecBuffer&       bufferIn,
                                   CCodecBuffer&       bufferOut,
-                                  Codec_Feedback_Proc pFeedbackProc = NULL,
-                                  CMP_DWORD_PTR       pUser1        = NULL,
-                                  CMP_DWORD_PTR       pUser2        = NULL);
+                                  Codec_Feedback_Proc pFeedbackProc = nullptr,
+                                  CMP_DWORD_PTR       pUser1        = 0,
+                                  CMP_DWORD_PTR       pUser2        = 0);
 
     virtual CCodecBuffer* CreateBuffer(CMP_BYTE  nBlockWidth,
                                        CMP_BYTE  nBlockHeight,
