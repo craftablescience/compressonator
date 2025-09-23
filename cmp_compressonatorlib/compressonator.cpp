@@ -403,7 +403,7 @@ CMP_ERROR CMP_API CMP_ConvertTexture(CMP_Texture*               pSourceTexture,
         assert(pCodecIn);
         assert(pCodecOut);
 
-        if (pCodecIn == NULL || pCodecOut == NULL)
+        if (pCodecIn == nullptr || pCodecOut == nullptr)
         {
             SAFE_DELETE(pCodecIn);
             SAFE_DELETE(pCodecOut);
@@ -433,7 +433,7 @@ CMP_ERROR CMP_API CMP_ConvertTexture(CMP_Texture*               pSourceTexture,
         assert(pSrcBuffer);
         assert(pTempBuffer);
         assert(pDestBuffer);
-        if (pSrcBuffer == NULL || pTempBuffer == NULL || pDestBuffer == NULL)
+        if (pSrcBuffer == nullptr || pTempBuffer == nullptr || pDestBuffer == nullptr)
         {
             SAFE_DELETE(pCodecIn);
             SAFE_DELETE(pCodecOut);
@@ -675,7 +675,7 @@ CMP_ERROR CMP_API CMP_ConvertMipTexture(CMP_MipSet* p_MipSetIn, CMP_MipSet* p_Mi
         }
     }
     //if (pFeedbackProc)
-    //    pFeedbackProc(100, NULL, NULL);
+    //    pFeedbackProc(100, nullptr, nullptr);
 
     return CMP_OK;
 }

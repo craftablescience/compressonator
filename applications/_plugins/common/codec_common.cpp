@@ -157,8 +157,8 @@ CodecType GetCodecType(CMP_FORMAT format)
 
 CMP_DWORD CalcBufferSize(CodecType nCodecType, CMP_DWORD dwWidth, CMP_DWORD dwHeight, CMP_BYTE nBlockWidth, CMP_BYTE nBlockHeight)
 {
-    nBlockWidth;
-    nBlockHeight;
+    (void) nBlockWidth;
+    (void) nBlockHeight;
 
     CMP_DWORD dwChannels;
     CMP_DWORD dwBitsPerChannel;

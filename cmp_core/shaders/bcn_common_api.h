@@ -296,7 +296,7 @@ CMP_STATIC CGU_Vec4i cmp_castimp(CGU_Vec4ui v1)
 #ifdef ASPM_HLSL
     return (v1);
 #else
-    return (v1.x, v1.y, v1.z, v1.w);
+    return CGU_Vec4i(v1.x, v1.y, v1.z, v1.w);
 #endif
 }
 
@@ -305,7 +305,7 @@ CMP_STATIC CGU_Vec3i cmp_castimp(CGU_Vec3ui v1)
 #ifdef ASPM_HLSL
     return (v1);
 #else
-    return (v1.x, v1.y, v1.z);
+    return CGU_Vec3i(v1.x, v1.y, v1.z);
 #endif
 }
 

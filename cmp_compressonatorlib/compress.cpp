@@ -193,7 +193,7 @@ CMP_ERROR CodecCompressTexture(const CMP_Texture* srcTexture, CMP_Texture* destT
         return CMP_ERR_UNSUPPORTED_DEST_FORMAT;
 
     CCodec* codec = CreateCodec(destType);
-    if (codec == NULL)
+    if (codec == nullptr)
         return CMP_ERR_UNABLE_TO_INIT_CODEC;
 
     CMP_BOOL swizzleSrcBuffer = false;
@@ -232,6 +232,9 @@ CMP_ERROR CodecCompressTexture(const CMP_Texture* srcTexture, CMP_Texture* destT
 
         switch (destType)
         {
+        default:
+            // probably won't hit this
+            return CMP_ERR_UNSUPPORTED_DEST_FORMAT;
         case CT_BC7:
             codec->SetParameter("MultiThreading", (CMP_DWORD)!options->bDisableMultiThreading);
 
@@ -322,7 +325,7 @@ CMP_ERROR CodecCompressTexture(const CMP_Texture* srcTexture, CMP_Texture* destT
 
     assert(srcBuffer);
     assert(destBuffer);
-    if (srcBuffer == NULL || destBuffer == NULL)
+    if (srcBuffer == nullptr || destBuffer == nullptr)
     {
         SAFE_DELETE(codec);
         SAFE_DELETE(srcBuffer);
@@ -358,7 +361,7 @@ CMP_ERROR CodecDecompressTexture(const CMP_Texture* srcTexture, CMP_Texture* des
     CCodec* codec = CreateCodec(srcType);
     assert(codec);
 
-    if (codec == NULL)
+    if (codec == nullptr)
         return CMP_ERR_UNABLE_TO_INIT_CODEC;
 
     if (options && options->dwSize == sizeof(CMP_CompressOptions))
@@ -391,7 +394,7 @@ CMP_ERROR CodecDecompressTexture(const CMP_Texture* srcTexture, CMP_Texture* des
                                                  destTexture->pData,
                                                  destTexture->dwDataSize);
 
-    if (srcBuffer == NULL || destBuffer == NULL)
+    if (srcBuffer == nullptr || destBuffer == nullptr)
     {
         SAFE_DELETE(codec);
         SAFE_DELETE(srcBuffer);
@@ -445,10 +448,10 @@ public:
 };
 
 CATICompressThreadData::CATICompressThreadData()
-    : m_pCodec(NULL)
-    , m_pSrcBuffer(NULL)
-    , m_pDestBuffer(NULL)
-    , m_pFeedbackProc(NULL)
+    : m_pCodec(nullptr)
+    , m_pSrcBuffer(nullptr)
+    , m_pDestBuffer(nullptr)
+    , m_pFeedbackProc(nullptr)
     , m_errorCode(CE_OK)
 {
 }
@@ -520,7 +523,7 @@ CMP_ERROR CodecCompressTextureThreaded(const CMP_Texture*         srcTexture,
         // Compressing
         threadData.m_pCodec = CreateCodec(destType);
         assert(threadData.m_pCodec);
-        if (threadData.m_pCodec == NULL)
+        if (threadData.m_pCodec == nullptr)
             return CMP_ERR_UNABLE_TO_INIT_CODEC;
 
         // Have we got valid options ?
@@ -556,12 +559,14 @@ CMP_ERROR CodecCompressTextureThreaded(const CMP_Texture*         srcTexture,
             else
                 threadData.m_pCodec->SetParameter("CompressionSpeed", (CMP_DWORD)options->nCompressionSpeed);
 
-            switch (destType)
-            {
-            case CT_BC6H:
-                // Reserved
-                break;
-            }
+            // ????????????????????
+            // Leaving this commented because it scares me
+            //switch (destType)
+            //{
+            //case CT_BC6H:
+            //    // Reserved
+            //    break;
+            //}
 
             // This will eventually replace the above code for setting codec options
             // It is currently implemented with BC6H and can be expanded to other codec
@@ -634,7 +639,7 @@ CMP_ERROR CodecCompressTextureThreaded(const CMP_Texture*         srcTexture,
 
             assert(threadData.m_pSrcBuffer);
             assert(threadData.m_pDestBuffer);
-            if (threadData.m_pSrcBuffer == NULL || threadData.m_pDestBuffer == NULL)
+            if (threadData.m_pSrcBuffer == nullptr || threadData.m_pDestBuffer == nullptr)
                 return CMP_ERR_GENERIC;
 
             threadData.m_pSrcBuffer->m_bSwizzle = swizzleSrcBuffer;

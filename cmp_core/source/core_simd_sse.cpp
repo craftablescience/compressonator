@@ -27,10 +27,12 @@
 #include "common_def.h"
 #include "bcn_common_kernel.h"
 
+#if !defined(ALIGN_16)
 #if defined(_WIN32) || defined(_WIN64)
 #define ALIGN_16 __declspec(align(16))
 #else
 #define ALIGN_16 __attribute__((aligned(16)))
+#endif
 #endif
 
 extern CGU_UINT32 CompressBlockBC1(const CGU_UINT8 *srcBlock, CGU_UINT32 srcStrideInBytes, CGU_UINT8 *dst, const CGU_UINT8 *options);

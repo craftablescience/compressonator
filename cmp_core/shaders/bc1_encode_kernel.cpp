@@ -229,7 +229,7 @@ int CMP_CDECL CreateOptionsBC1(void** options)
     }
     else
     {
-        (*options) = NULL;
+        (*options) = nullptr;
         return CGU_CORE_ERR_NEWMEM;
     }
     return CGU_CORE_OK;
@@ -323,7 +323,7 @@ int CMP_CDECL SetGammaBC1(void* options, CGU_BOOL sRGB)
     return SetSrgbBC1(options, sRGB);
 }
 
-int CMP_CDECL CompressBlockBC1(const unsigned char* srcBlock, unsigned int srcStrideInBytes, CMP_GLOBAL unsigned char cmpBlock[8], const void* options = NULL)
+int CMP_CDECL CompressBlockBC1(const unsigned char* srcBlock, unsigned int srcStrideInBytes, CMP_GLOBAL unsigned char cmpBlock[8], const void* options = nullptr)
 {
     CMP_Vec4uc inBlock[16];
 
@@ -347,7 +347,7 @@ int CMP_CDECL CompressBlockBC1(const unsigned char* srcBlock, unsigned int srcSt
 
     CMP_BC15Options* BC15options = (CMP_BC15Options*)options;
     CMP_BC15Options  BC15optionsDefault;
-    if (BC15options == NULL)
+    if (BC15options == nullptr)
     {
         BC15options = &BC15optionsDefault;
         SetDefaultBC15Options(BC15options);
@@ -357,11 +357,11 @@ int CMP_CDECL CompressBlockBC1(const unsigned char* srcBlock, unsigned int srcSt
     return CGU_CORE_OK;
 }
 
-int CMP_CDECL DecompressBlockBC1(const unsigned char cmpBlock[8], CMP_GLOBAL unsigned char srcBlock[64], const void* options = NULL)
+int CMP_CDECL DecompressBlockBC1(const unsigned char cmpBlock[8], CMP_GLOBAL unsigned char srcBlock[64], const void* options = nullptr)
 {
     CMP_BC15Options* BC15options = (CMP_BC15Options*)options;
     CMP_BC15Options  BC15optionsDefault;
-    if (BC15options == NULL)
+    if (BC15options == nullptr)
     {
         BC15options = &BC15optionsDefault;
         SetDefaultBC15Options(BC15options);

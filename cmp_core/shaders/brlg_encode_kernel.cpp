@@ -48,9 +48,9 @@ CMP_STATIC CMP_KERNEL void CMP_GPUEncoder(CMP_GLOBAL const CMP_Vec4uc ImageSourc
 
 // Use CPU to process data
 #ifndef ASPM_GPU
-void CMP_CDECL CompressBlockBRLG(unsigned char srcBlock[64], unsigned char cmpBlock[16], CMP_GLOBAL CMP_BRLGEncode* BRLGEncode = NULL)
+void CMP_CDECL CompressBlockBRLG(unsigned char srcBlock[64], unsigned char cmpBlock[16], CMP_GLOBAL CMP_BRLGEncode* BRLGEncode = nullptr)
 {
-    if (BRLGEncode == NULL)
+    if (BRLGEncode == nullptr)
     {
         // set for q = 1.0
         CMP_BRLGEncode BRLGEncodeDefault;

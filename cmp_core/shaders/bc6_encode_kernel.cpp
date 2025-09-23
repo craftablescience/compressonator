@@ -2118,7 +2118,7 @@ CGU_FLOAT lerpf(CGU_FLOAT a, CGU_FLOAT b, CGU_INT i, CGU_INT denom)
     assert(denom == 3 || denom == 7 || denom == 15);
     assert(i >= 0 && i <= denom);
 
-    CGU_INT* weights = NULL;
+    CGU_INT* weights = nullptr;
 
     switch (denom)
     {
@@ -2390,7 +2390,7 @@ CGU_FLOAT FindBestPattern(BC6H_Encode_local* BC6H_data, CGU_BOOL TwoRegionShapes
 #ifndef ASPM_GPU
 void SaveDataBlock(BC6H_Encode_local* bc6h_format, CMP_GLOBAL CGU_UINT8 cmpout[COMPRESSED_BLOCK_SIZE])
 {
-    BitHeader header(NULL, COMPRESSED_BLOCK_SIZE);
+    BitHeader header(nullptr, COMPRESSED_BLOCK_SIZE);
 
     // Save the RGB end point values
     switch (bc6h_format->m_mode)
@@ -4120,7 +4120,7 @@ static int lerp(int a, int b, int i, int denom)
     assert(denom == 3 || denom == 7 || denom == 15);
     assert(i >= 0 && i <= denom);
 
-    int shift = 6, *weights = NULL;
+    int shift = 6, *weights = nullptr;
 
     switch (denom)
     {
@@ -4365,7 +4365,7 @@ int CMP_CDECL SetSignedBC6(void* options, CGU_BOOL sf16)
 int CMP_CDECL CompressBlockBC6(const CGU_UINT16*      srcBlock,
                                unsigned int           srcStrideInShorts,
                                CMP_GLOBAL CGU_UINT8   cmpBlock[16],
-                               const CMP_GLOBAL void* options = NULL)
+                               const CMP_GLOBAL void* options = nullptr)
 {
     CGU_UINT16 inBlock[48] = {};
 
@@ -4388,7 +4388,7 @@ int CMP_CDECL CompressBlockBC6(const CGU_UINT16*      srcBlock,
     BC6H_Encode* BC6HEncode = (BC6H_Encode*)options;
     BC6H_Encode  BC6HEncodeDefault;
 
-    if (BC6HEncode == NULL)
+    if (BC6HEncode == nullptr)
     {
         BC6HEncode = &BC6HEncodeDefault;
         SetDefaultBC6Options(BC6HEncode);
@@ -4410,12 +4410,12 @@ int CMP_CDECL CompressBlockBC6(const CGU_UINT16*      srcBlock,
     return CGU_CORE_OK;
 }
 
-int CMP_CDECL DecompressBlockBC6(const unsigned char cmpBlock[16], CGU_UINT16 srcBlock[48], const void* options = NULL)
+int CMP_CDECL DecompressBlockBC6(const unsigned char cmpBlock[16], CGU_UINT16 srcBlock[48], const void* options = nullptr)
 {
     BC6H_Encode* BC6HEncode = (BC6H_Encode*)options;
     BC6H_Encode  BC6HEncodeDefault;
 
-    if (BC6HEncode == NULL)
+    if (BC6HEncode == nullptr)
     {
         BC6HEncode = &BC6HEncodeDefault;
         SetDefaultBC6Options(BC6HEncode);

@@ -613,6 +613,8 @@ CMP_BOOL CMP_API CMP_IsValidFormat(CMP_FORMAT InFormat)
     case CMP_FORMAT_BASIS: {
         return true;
     }
+    default:
+        break;
     }
     return false;
 }
@@ -637,7 +639,6 @@ CMP_ChannelFormat GetChannelFormat(CMP_FORMAT format)
     case CMP_FORMAT_RG_16F:
     case CMP_FORMAT_R_16F:
         return CF_Float16;
-        break;
     case CMP_FORMAT_RGBA_1010102:
         return CF_1010102;
     case CMP_FORMAT_ARGB_2101010:
@@ -649,8 +650,9 @@ CMP_ChannelFormat GetChannelFormat(CMP_FORMAT format)
     case CMP_FORMAT_RG_16:
     case CMP_FORMAT_R_16:
         return CF_16bit;
+    default:
+        break;
     }
-
     return CF_8bit;
 }
 
@@ -672,11 +674,8 @@ CMP_BYTE GetChannelFormatBitSize(CMP_FORMAT format)
     case CMP_FORMAT_R_16:
     case CMP_FORMAT_BC6H:
     case CMP_FORMAT_BC6H_SF:
-    case CMP_FORMAT_ARGB_2101010: {
-        return (CMP_BYTE)(16);
-    }
-    break;
-
+    case CMP_FORMAT_ARGB_2101010:
+        return 16;
     case CMP_FORMAT_ARGB_32F:
     case CMP_FORMAT_ABGR_32F:
     case CMP_FORMAT_RGBA_32F:
@@ -685,13 +684,12 @@ CMP_BYTE GetChannelFormatBitSize(CMP_FORMAT format)
     case CMP_FORMAT_BGR_32F:
     case CMP_FORMAT_RG_32F:
     case CMP_FORMAT_R_32F:
-    case CMP_FORMAT_RGBE_32F: {
-        return (CMP_BYTE)(32);
+    case CMP_FORMAT_RGBE_32F:
+        return 32;
+    default:
+        break;
     }
-    break;
-    }
-
-    return (CMP_BYTE)(8);
+    return 8;
 }
 
 static CMP_FORMAT GetFormat(CMP_DWORD dwFourCC)

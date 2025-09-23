@@ -29,7 +29,7 @@
 
 GTC_Encode g_GTCEncode;
 
-void (*GTC_CompressBlock)(void* srcblock, void* outblock, void* blockoptions) = NULL;
+void (*GTC_CompressBlock)(void* srcblock, void* outblock, void* blockoptions) = nullptr;
 
 double GTCBlockEncoder::CompressBlock(CMP_BYTE* srcblock, CMP_BYTE outblock[COMPRESSED_BLOCK_SIZE])
 {

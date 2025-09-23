@@ -27,7 +27,7 @@
 
 #include "gt_decode.h"
 
-void (*GTC_DecompressBlock)(void* in, void* out) = NULL;
+void (*GTC_DecompressBlock)(void* in, void* out) = nullptr;
 
 void GTCBlockDecoder::DecompressBlock(CMP_BYTE out[MAX_SUBSET_SIZE][MAX_DIMENSION_BIG], CMP_BYTE in[COMPRESSED_BLOCK_SIZE])
 {

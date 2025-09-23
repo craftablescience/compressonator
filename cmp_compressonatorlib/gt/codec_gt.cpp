@@ -44,7 +44,7 @@
 
 #ifdef USE_FILEIO
 #include <stdio.h>
-FILE* gt_File       = NULL;
+FILE* gt_File       = nullptr;
 int   gt_blockcount = 0;
 int   gt_total_MSE  = 0;
 #endif
@@ -78,7 +78,7 @@ unsigned int _stdcall GTCThreadProcEncode(void* param)
     return 0;
 }
 
-static GTCEncodeThreadParam* g_EncodeParameterStorage = NULL;
+static GTCEncodeThreadParam* g_EncodeParameterStorage = nullptr;
 
 //////////////////////////////////////////////////////////////////////////////
 // Construction/Destruction

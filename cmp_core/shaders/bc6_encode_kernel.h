@@ -250,7 +250,7 @@ public:
         m_bits.reset();
         m_sizeinbytes = sizeinbytes;
 
-        if ((in != NULL) && (sizeinbytes <= 16))
+        if ((in != nullptr) && (sizeinbytes <= 16))
         {
             // Init bits set with given data
             CGU_INT bitpos = 0;
@@ -273,7 +273,7 @@ public:
 
     void transferbits(CGU_UINT8 in[], CGU_INT sizeinbytes)
     {
-        if ((sizeinbytes <= m_sizeinbytes) && (in != NULL))
+        if ((sizeinbytes <= m_sizeinbytes) && (in != nullptr))
         {
             // Init bits set with given data
             memset(in, 0, sizeinbytes);

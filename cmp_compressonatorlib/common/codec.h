@@ -93,14 +93,14 @@ public:
 
     virtual CodecError Compress(CCodecBuffer&       bufferIn,
                                 CCodecBuffer&       bufferOut,
-                                Codec_Feedback_Proc pFeedbackProc = NULL,
-                                CMP_DWORD_PTR       pUser1        = NULL,
-                                CMP_DWORD_PTR       pUser2        = NULL)   = 0;
+                                Codec_Feedback_Proc pFeedbackProc = nullptr,
+                                CMP_DWORD_PTR       pUser1        = nullptr,
+                                CMP_DWORD_PTR       pUser2        = nullptr)   = 0;
     virtual CodecError Decompress(CCodecBuffer&       bufferIn,
                                   CCodecBuffer&       bufferOut,
-                                  Codec_Feedback_Proc pFeedbackProc = NULL,
-                                  CMP_DWORD_PTR       pUser1        = NULL,
-                                  CMP_DWORD_PTR       pUser2        = NULL) = 0;
+                                  Codec_Feedback_Proc pFeedbackProc = nullptr,
+                                  CMP_DWORD_PTR       pUser1        = nullptr,
+                                  CMP_DWORD_PTR       pUser2        = nullptr) = 0;
 
 protected:
     CodecType m_CodecType;

@@ -3514,7 +3514,7 @@ int CMP_CDECL SetAlphaOptionsBC7(void* options, CGU_BOOL imageNeedsAlpha, CGU_BO
     return CGU_CORE_OK;
 }
 
-int CMP_CDECL CompressBlockBC7(const unsigned char* srcBlock, unsigned int srcStrideInBytes, CMP_GLOBAL unsigned char cmpBlock[16], const void* options = NULL)
+int CMP_CDECL CompressBlockBC7(const unsigned char* srcBlock, unsigned int srcStrideInBytes, CMP_GLOBAL unsigned char cmpBlock[16], const void* options = nullptr)
 {
     CMP_Vec4uc inBlock[SOURCE_BLOCK_SIZE];
 
@@ -3538,7 +3538,7 @@ int CMP_CDECL CompressBlockBC7(const unsigned char* srcBlock, unsigned int srcSt
 
     BC7_Encode* u_BC7Encode      = (BC7_Encode*)options;
     BC7_Encode  BC7EncodeDefault = {0};
-    if (u_BC7Encode == NULL)
+    if (u_BC7Encode == nullptr)
     {
         u_BC7Encode = &BC7EncodeDefault;
         SetDefaultBC7Options(u_BC7Encode);
@@ -3586,11 +3586,11 @@ int CMP_CDECL CompressBlockBC7(const unsigned char* srcBlock, unsigned int srcSt
     return CGU_CORE_OK;
 }
 
-int CMP_CDECL DecompressBlockBC7(const unsigned char cmpBlock[16], unsigned char srcBlock[64], const void* options = NULL)
+int CMP_CDECL DecompressBlockBC7(const unsigned char cmpBlock[16], unsigned char srcBlock[64], const void* options = nullptr)
 {
     BC7_Encode* u_BC7Encode      = (BC7_Encode*)options;
     BC7_Encode  BC7EncodeDefault = {0};  // for q = 0.05
-    if (u_BC7Encode == NULL)
+    if (u_BC7Encode == nullptr)
     {
         // set for q = 1.0
         u_BC7Encode = &BC7EncodeDefault;
