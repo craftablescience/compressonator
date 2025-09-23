@@ -132,7 +132,7 @@ void setupAlphaTable();
 #define BLUE(img,width,x,y)  img[3*(y*width+x)+2]
 
 #define SHIFT(size,startpos) ((startpos)-(size)+1)
-#define MASK(size, startpos) (((2<<(size-1))-1) << SHIFT(size,startpos))
+#define MASK(size, startpos) (((((long long)2)<<(size-1))-1) << SHIFT(size,startpos))
 #define PUTBITS( dest, data, size, startpos) dest = ((dest & ~MASK(size, startpos)) | ((data << SHIFT(size, startpos)) & MASK(size,startpos)))
 #define SHIFTHIGH(size, startpos) (((startpos)-32)-(size)+1)
 #define MASKHIGH(size, startpos) (((1<<(size))-1) << SHIFTHIGH(size,startpos))
@@ -16073,14 +16073,7 @@ void compressFile(char *srcfile,char *dstfile)
             }
             printf("Compressing...\n");
 
-            tstart=time(NULL);
-            ftime( &tstruct );
-            tstart=tstart*1000+tstruct.millitm;
-            compressImageFile(srcimg,alphaimg,width,height,dstfile,extendedwidth, extendedheight);            
-            tstop = time(NULL);
-            ftime( &tstruct );
-            tstop = tstop*1000+tstruct.millitm;
-            printf( "It took %u milliseconds to compress:\n", tstop - tstart);
+            compressImageFile(srcimg,alphaimg,width,height,dstfile,extendedwidth, extendedheight);
             calculatePSNRfile(dstfile,srcimg,alphaimg);
         }
     }

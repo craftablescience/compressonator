@@ -741,8 +741,8 @@ CMP_ERROR CMP_API CMP_MipSetAnlaysis(CMP_MipSet* src1, CMP_MipSet* src2, CMP_INT
     CMP_ChannelFormat src1ChannelFormat = src1->m_ChannelFormat;
     CMP_ChannelFormat src2ChannelFormat = src2->m_ChannelFormat;
 
-    bool isSrc1Float = CMP_IsFloatFormat(src1->m_format);
-    bool isSrc2Float = CMP_IsFloatFormat(src2->m_format);
+    //bool isSrc1Float = CMP_IsFloatFormat(src1->m_format);
+    //bool isSrc2Float = CMP_IsFloatFormat(src2->m_format);
 
     ConvertedBuffer src1Buffer;
     src1Buffer.data     = pCurMipLevel1->m_pbData;

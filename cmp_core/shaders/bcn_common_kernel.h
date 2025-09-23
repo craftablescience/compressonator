@@ -45,6 +45,7 @@
 // Use CPU CMP_Core replacements
 //-----------------------------------------------------------------------
 // used in BC1 HiQuaity
+#if !defined(ALIGN_16)
 #if defined(ASPM_GPU) || defined(ASPM_HLSL) || defined(ASPM_OPENCL)
 #define ALIGN_16
 #else
@@ -54,6 +55,7 @@
 #else  // !WIN32 && !_WIN64
 #define ALIGN_16
 #endif  // !WIN32 && !_WIN64
+#endif
 #endif
 
 #define DXTC_OFFSET_ALPHA 0

@@ -26,9 +26,9 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
-#pragma warning(disable : 4100)  // Ignore warnings of unreferenced formal parameters
 
 #ifdef _WIN32
+#pragma warning(disable : 4100)  // Ignore warnings of unreferenced formal parameters
 
 #include "codec_common.h"
 #include "cmp_common.h"

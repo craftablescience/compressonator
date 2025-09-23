@@ -161,12 +161,12 @@ CMP_TextureType ParseTextureType(char* typeString)
         return TT_Unknown;
 
     char buffer[128] = {};
-    for (int i = 0; i < sizeof(buffer) / sizeof(buffer[0]) && typeString[i] != '\0'; ++i)
+    for (int i = 0; i < static_cast<int>(std::size(buffer)) && typeString[i] != '\0'; ++i)
     {
-        buffer[i] = (char)std::toupper(typeString[i]);
+        buffer[i] = static_cast<char>(std::toupper(typeString[i]));
     }
 
-    for (int i = 0; i < TEXTURE_TYPE_DESC_COUNT; ++i)
+    for (int i = 0; i < static_cast<int>(TEXTURE_TYPE_DESC_COUNT); ++i)
     {
         if (strcmp(buffer, g_TextureTypeDesc[i].pszTextureTypeDesc) == 0)
             return g_TextureTypeDesc[i].nTextureType;

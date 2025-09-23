@@ -85,7 +85,7 @@ float lerpf(float a, float b, int i, int denom) {
 }
 
 int QuantizeToInt(short value, int prec, bool signedfloat16, float exposure) {
-    (exposure);
+    (void) exposure;
 
     if (prec <= 1) return 0;
     bool negvalue = false;
@@ -1435,7 +1435,7 @@ void quant_AnD_Shell(float* v_, int k, int n, int *idx) {
         }
 
         // position which should be in 0
-        j = ++j % n;
+        j = (j + 1) % n;
 
         for (i = j; i < n; i++)
             idx[d[i].i]++;
@@ -1635,7 +1635,7 @@ const float rampLerpWeights[5][16] = {
 };
 
 float rampf(int clog, int bits, float p1, float p2, int indexPos) {
-    (bits);
+    (void) bits;
     // (clog+ LOG_CL_BASE) starts from 2 to 4
     return  (float)p1 + rampLerpWeights[clog + LOG_CL_BASE][indexPos] * (p2 - p1);
 }

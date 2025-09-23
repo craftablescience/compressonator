@@ -40,6 +40,7 @@
 // When build is for CPU, we have some missing API calls common to GPU
 // Use CPU CMP_Core replacements
 //-----------------------------------------------------------------------
+#if !defined(ALIGN_16)
 #if defined(ASPM_GPU) || defined(ASPM_HLSL) || defined(ASPM_OPENCL)
 #define ALIGN_16
 #define ALIGN_32
@@ -55,6 +56,7 @@
 #define ALIGN_32 __attribute__((aligned(32)))
 #define ALIGN_64 __attribute__((aligned(64)))
 #endif  // !WIN32 && !_WIN64
+#endif
 #endif
 
 #define USE_REFINE3D

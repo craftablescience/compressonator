@@ -29,16 +29,6 @@ message("Building Compressonator version ${PROJECT_VERSION_MAJOR}.${PROJECT_VERS
 
 include(cmake/helperfunctions.cmake)
 
-# Common compiler options
-
-if (CMP_HOST_WINDOWS)
-    add_compile_options(/W4 /wd4201)
-#    add_compile_options(/W4 /WX /wd4201)
-elseif(CMP_HOST_LINUX)
-    add_compile_options(-Wall)
-#    add_compile_options(-Wall -Werror)
-endif()
-
 # Set compiler feature support levels
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)

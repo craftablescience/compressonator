@@ -599,8 +599,6 @@ CMP_ERROR CMP_API CMP_ConvertMipTexture(CMP_MipSet* p_MipSetIn, CMP_MipSet* p_Mi
 
             for (int nFaceOrSlice = 0; nFaceOrSlice < CMP_MaxFacesOrSlices(p_MipSetIn, nMipLevel); nFaceOrSlice++)
             {
-                CMP_DWORD sourceDataSize = 0;
-
                 //=====================
                 // Uncompressed source
                 //======================
@@ -656,10 +654,6 @@ CMP_ERROR CMP_API CMP_ConvertMipTexture(CMP_MipSet* p_MipSetIn, CMP_MipSet* p_Mi
                 destTexture.pData  = pOutMipLevel->m_pbData;
                 p_MipSetOut->pData = pOutMipLevel->m_pbData;
 
-                // this is needed to preserve the correct initial source size because CMP_ConvertTexture might
-                // edit the srcTexture and change its format into one better suited for processing
-                sourceDataSize = srcTexture.dwDataSize;
-
                 //========================
                 // Process ConvertTexture
                 //========================
@@ -669,13 +663,9 @@ CMP_ERROR CMP_API CMP_ConvertMipTexture(CMP_MipSet* p_MipSetIn, CMP_MipSet* p_Mi
                 {
                     return cmp_status;
                 }
-                else
-                    p_MipSetOut->m_nIterations++;
+                p_MipSetOut->m_nIterations++;
             }
         }
     }
-    //if (pFeedbackProc)
-    //    pFeedbackProc(100, nullptr, nullptr);
-
     return CMP_OK;
 }

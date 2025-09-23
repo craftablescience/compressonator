@@ -387,13 +387,13 @@ CMP_INT CMP_API CMP_GenerateMIPLevelsEx(CMP_MipSet* pMipSet, CMP_CFilterParams* 
                 {
                     // Wrong size - release & reallocate
                     //CMips->FreeMipLevelData(pThisMipLevel);
-                    if (CMips.AllocateMipLevelData(pThisMipLevel, nWidth, nHeight, pMipSet->m_ChannelFormat, pMipSet->m_TextureDataType) == NULL)
+                    if (!CMips.AllocateMipLevelData(pThisMipLevel, nWidth, nHeight, pMipSet->m_ChannelFormat, pMipSet->m_TextureDataType))
                     {
                         return CMP_ERR_GENERIC;
                     }
                 }
             }
-            else if (CMips.AllocateMipLevelData(pThisMipLevel, nWidth, nHeight, pMipSet->m_ChannelFormat, pMipSet->m_TextureDataType) == NULL)
+            else if (!CMips.AllocateMipLevelData(pThisMipLevel, nWidth, nHeight, pMipSet->m_ChannelFormat, pMipSet->m_TextureDataType))
             {
                 return CMP_ERR_GENERIC;
             }

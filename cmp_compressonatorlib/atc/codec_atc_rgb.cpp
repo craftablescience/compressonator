@@ -26,7 +26,9 @@
 //  Description: implementation of the CCodec_ATC class
 //
 //////////////////////////////////////////////////////////////////////////////
+#ifdef _WIN32
 #pragma warning(disable : 4100)
+#endif
 
 #include "cmp_common.h"
 #include "codec_atc_rgb.h"
