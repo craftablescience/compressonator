@@ -139,9 +139,6 @@ static void CMP_PrepareSourceForCMP_Destination(CMP_Texture* pTexture, CMP_FORMA
             // The source format is correct for these codecs
             break;
         }
-#if (OPTION_BUILD_ASTC == 1)
-        case CMP_FORMAT_ASTC:
-#endif
         case CMP_FORMAT_BC6H:
         case CMP_FORMAT_BC7:
         case CMP_FORMAT_GT:
@@ -191,9 +188,6 @@ static void CMP_PrepareSourceForCMP_Destination(CMP_Texture* pTexture, CMP_FORMA
             CMP_Map_Bytes(pData, dwWidth, dwHeight, {2, 1, 0, 3}, 4);
             break;
         }
-#if (OPTION_BUILD_ASTC == 1)
-        case CMP_FORMAT_ASTC:
-#endif
         case CMP_FORMAT_BC6H:
         case CMP_FORMAT_BC7:
         case CMP_FORMAT_ETC_RGB:
@@ -239,9 +233,6 @@ static void CMP_PrepareSourceForCMP_Destination(CMP_Texture* pTexture, CMP_FORMA
             CMP_Map_Bytes(pData, dwWidth, dwHeight, {3, 2, 1, 0}, 4);
             break;
         }
-#if (OPTION_BUILD_ASTC == 1)
-        case CMP_FORMAT_ASTC:
-#endif
         case CMP_FORMAT_BC6H:
         case CMP_FORMAT_BC7:
         case CMP_FORMAT_ETC_RGB:
@@ -378,9 +369,6 @@ CMP_ERROR CMP_API CMP_ConvertTexture(CMP_Texture*               pSourceTexture,
         // this call is disabled for BC7/BC6H ASTC Codecs.
         // if the user has set DisableMultiThreading then numThreads will be set to 1 (regardless of its original value)
         if (((!pOptions || !pOptions->bDisableMultiThreading) && CMP_GetNumberOfProcessors() > 1) && (bMultithread) &&
-#if (OPTION_BUILD_ASTC == 1)
-            (destType != CT_ASTC) &&
-#endif
             (destType != CT_BC7) && (destType != CT_BC6H) && (destType != CT_BC6H_SF)
 #ifdef USE_APC
             && (destType != CT_APC)
@@ -505,9 +493,6 @@ CMP_ERROR CMP_API CMP_ConvertMipTexture(CMP_MipSet* p_MipSetIn, CMP_MipSet* p_Mi
     p_MipSetOut->m_nDepth        = p_MipSetIn->m_nDepth;
     p_MipSetOut->m_TextureType   = p_MipSetIn->m_TextureType;
 
-    if (pOptions->DestFormat == CMP_FORMAT_BROTLIG)
-        p_MipSetOut->m_transcodeFormat = p_MipSetIn->m_format;
-
     p_MipSetOut->m_nIterations = 0;  // tracks number of processed data miplevels
 
     //=====================================================
@@ -598,15 +583,6 @@ CMP_ERROR CMP_API CMP_ConvertMipTexture(CMP_MipSet* p_MipSetIn, CMP_MipSet* p_Mi
 
         CMP_INT srcNumMipmapLevels = p_MipSetIn->m_nMipLevels;
 
-        // It is possible that the source texture will have an "m_nMipLevels" value greater than 1 when compressing to Brotli-G,
-        // but it will not contain any data, so we always want to compress only the one mipmap level.
-        // We do this instead of altering the value because it is still important for us to be able to know how many mipmap levels
-        // the source texture has when compressing to Brotli-G
-        if (pOptions->DestFormat == CMP_FORMAT_BROTLIG)
-        {
-            srcNumMipmapLevels = 1;
-        }
-
         p_MipSetOut->m_nMipLevels = p_MipSetIn->m_nMipLevels;
 
         for (int nMipLevel = 0; nMipLevel < srcNumMipmapLevels; nMipLevel++)
@@ -680,27 +656,6 @@ CMP_ERROR CMP_API CMP_ConvertMipTexture(CMP_MipSet* p_MipSetIn, CMP_MipSet* p_Mi
                 destTexture.pData  = pOutMipLevel->m_pbData;
                 p_MipSetOut->pData = pOutMipLevel->m_pbData;
 
-// Disabled, not working in Compressonator.NET
-// #ifndef _LINUX
-//                 //==========================
-//                 // Print info about input
-//                 //==========================
-//                 // NOTE: This is duplicated in CMP_ConvertMipTextureCGP
-//                 if (pOptions->m_PrintInfoStr)
-//                 {
-//                     char buff[256];
-//                     if ((p_MipSetOut->m_format == CMP_FORMAT_BROTLIG) || (p_MipSetOut->m_format == CMP_FORMAT_BINARY))
-//                         snprintf(buff, sizeof(buff), "Source data size      = %d Bytes\n", srcTexture.dwDataSize);
-//                     else
-//                         snprintf(buff,
-//                                  sizeof(buff),
-//                                  "Source data size      = %d Bytes, width = %d px  height = %d px\n",
-//                                  srcTexture.dwDataSize,
-//                                  srcTexture.dwWidth,
-//                                  srcTexture.dwHeight);
-//                     pOptions->m_PrintInfoStr(buff);
-//                 }
-// #endif
                 // this is needed to preserve the correct initial source size because CMP_ConvertTexture might
                 // edit the srcTexture and change its format into one better suited for processing
                 sourceDataSize = srcTexture.dwDataSize;
@@ -716,68 +671,11 @@ CMP_ERROR CMP_API CMP_ConvertMipTexture(CMP_MipSet* p_MipSetIn, CMP_MipSet* p_Mi
                 }
                 else
                     p_MipSetOut->m_nIterations++;
-
-                if (p_MipSetOut->m_format == CMP_FORMAT_BROTLIG)
-                {
-                    p_MipSetOut->dwDataSize = destTexture.dwDataSize;
-                }
-// // Disabled, not working in Compressonator.NET
-// #ifndef _LINUX
-//                 //==========================
-//                 // Print info about output
-//                 //==========================
-//                 // NOTE: This is mostly duplicated in CMP_ConvertMipTextureCGP
-//                 if (pOptions->m_PrintInfoStr && (destTexture.dwDataSize > 0) && (p_MipSetOut->m_format != CMP_FORMAT_BINARY))
-//                 {
-//                     char buff[256];
-//                     snprintf(buff,
-//                              sizeof(buff),
-//                              "\rDestination data size = %d Bytes   Resulting compression ratio = %2.2f:1\n",
-//                              destTexture.dwDataSize,
-//                              sourceDataSize / (float)destTexture.dwDataSize);
-//                     pOptions->m_PrintInfoStr(buff);
-//                 }
-// #endif
             }
         }
     }
     //if (pFeedbackProc)
     //    pFeedbackProc(100, NULL, NULL);
-
-    return CMP_OK;
-}
-
-CMP_ERROR CMP_API CMP_MipSetToTexture(const CMP_MipSet* mipSet, CMP_INT mipLevelIndex, CMP_Texture* pDestTexture) {
-    assert(mipSet);
-    assert(pDestTexture);
-    assert(mipLevelIndex);
-
-    if (mipLevelIndex < 0 || mipLevelIndex >= mipSet->m_nMipLevels)
-        return CMP_OK;
-
-    CMP_MipLevel* mipLevel = 0;
-    CMP_GetMipLevel(&mipLevel, mipSet, mipLevelIndex, 0);
-
-    if (!mipLevel)
-        return CMP_OK;
-
-    pDestTexture->dwSize = sizeof(CMP_Texture);
-
-    pDestTexture->dwWidth  = mipLevel->m_nWidth;
-    pDestTexture->dwHeight = mipLevel->m_nHeight;
-    pDestTexture->dwPitch  = 0;
-
-    pDestTexture->format          = mipSet->m_format;
-    pDestTexture->transcodeFormat = mipSet->m_transcodeFormat;
-
-    pDestTexture->nBlockWidth  = mipSet->m_nBlockWidth;
-    pDestTexture->nBlockHeight = mipSet->m_nBlockHeight;
-    pDestTexture->nBlockDepth  = mipSet->m_nBlockDepth;
-
-    pDestTexture->dwDataSize = mipLevel->m_dwLinearSize;
-    pDestTexture->pData      = mipLevel->m_pbData;
-
-    pDestTexture->pMipSet = (void*)&mipSet;
 
     return CMP_OK;
 }

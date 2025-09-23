@@ -116,10 +116,6 @@ CodecType GetCodecType(CMP_FORMAT format)
         return CT_BC6H_SF;
     case CMP_FORMAT_BC7:
         return CT_BC7;
-#if (OPTION_BUILD_ASTC == 1)
-    case CMP_FORMAT_ASTC:
-        return CT_ASTC;
-#endif
     case CMP_FORMAT_ATC_RGB:
         return CT_ATC_RGB;
     case CMP_FORMAT_ATC_RGBA_Explicit:
@@ -148,8 +144,6 @@ CodecType GetCodecType(CMP_FORMAT format)
     case CMP_FORMAT_GTC:
         return CT_GTC;
 #endif
-    case CMP_FORMAT_BROTLIG:
-        return CT_BRLG;
 #ifdef USE_BASIS
     case CMP_FORMAT_BASIS:
         return CT_BASIS;
@@ -245,14 +239,6 @@ CMP_DWORD CalcBufferSize(CodecType nCodecType, CMP_DWORD dwWidth, CMP_DWORD dwHe
         if (buffsize < BC_BLOCK_PIXELS)
             buffsize = BC_BLOCK_PIXELS;
         break;
-#if (OPTION_BUILD_ASTC == 1)
-    // Block size ranges from 4x4 to 12x12 and 128 bits per block
-    case CT_ASTC:
-        dwWidth  = ((dwWidth + nBlockWidth - 1) / nBlockWidth) * 4;
-        dwHeight = ((dwHeight + nBlockHeight - 1) / nBlockHeight) * 4;
-        buffsize = dwWidth * dwHeight;
-        break;
-#endif
 #ifdef _WIN32
 #ifdef USE_APC
     case CT_APC:

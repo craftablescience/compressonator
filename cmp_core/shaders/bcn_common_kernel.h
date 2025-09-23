@@ -33,7 +33,9 @@
 #ifndef _BCN_COMMON_KERNEL_H
 #define _BCN_COMMON_KERNEL_H
 
+#ifdef _WIN32
 #pragma warning(disable : 4505)  // disable warnings on unreferenced local function has been removed
+#endif
 
 #include "common_def.h"
 #include "bcn_common_api.h"

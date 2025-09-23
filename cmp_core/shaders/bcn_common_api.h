@@ -28,9 +28,11 @@
 // NOTE: Do not use these API in production code, subject to changes
 //===================================================================
 
+#ifdef _WIN32
 #ifndef ASPM_GPU
 #pragma warning(disable : 4244)
 #pragma warning(disable : 4201)
+#endif
 #endif
 
 #if defined(_M_X64) || defined(_M_IX86) || defined(x86_64) || defined(i386)

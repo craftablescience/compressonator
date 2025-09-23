@@ -39,10 +39,14 @@
 #include <string>
 #include <cstring>
 
+#ifdef _WIN32
 #pragma warning(push)
 #pragma warning(disable : 4244)
+#endif
 #include <half.h>
+#ifdef _WIN32
 #pragma warning(pop)
+#endif
 
 #ifndef CMP_MAKEFOURCC
 #define CMP_MAKEFOURCC(ch0, ch1, ch2, ch3) \

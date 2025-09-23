@@ -118,16 +118,12 @@ extern "C" {
 
 #define CMP_FOURCC_BC6H CMP_MAKEFOURCC('B', 'C', '6', 'H')
 #define CMP_FOURCC_BC7 CMP_MAKEFOURCC('B', 'C', '7', 'x')
-#if (OPTION_BUILD_ASTC == 1)
-#define CMP_FOURCC_ASTC CMP_MAKEFOURCC('A', 'S', 'T', 'C')
-#endif
 #ifdef USE_APC
 #define CMP_FOURCC_APC CMP_MAKEFOURCC('A', 'P', 'C', 'x')  // This is not a standard
 #endif
 #ifdef USE_GTC
 #define CMP_FOURCC_GTC CMP_MAKEFOURCC('G', 'T', 'C', 'x')  // This is not a standard
 #endif
-#define CMP_FOURCC_BROTLIG CMP_MAKEFOURCC('B', 'R', 'L', 'G')  // This is not a standard
 #ifdef USE_BASIS
 #define CMP_FOURCC_BASIS CMP_MAKEFOURCC('B', 'A', 'S', '1')  // This is not a standard
 #endif
@@ -262,16 +258,6 @@ typedef union mapset_data_u
 //    MipLevelTable*    m_pMipLevelTable;    ///< This is an implementation dependent way of storing the MipLevels that this mip-map set contains. Do not depend on it, use TC_AppGetMipLevel to access a mip-map set's MipLevels.
 //    void*             m_pReservedData;     ///< Pointer to reserved data types
 // } MipSet;
-
-CMP_DWORD GetChannelSize(ChannelFormat channelFormat);       //< \internal
-CMP_DWORD GetChannelCount(TextureDataType textureDataType);  //< \internal
-CMP_DWORD GetPixelSize(const MipSet& mipset);                //< \internal
-
-bool GetMipSetPixelColorARGB8888(const MipSet& mipset, int nMipLevel, int nFaceOrSlice, int nXpos, int nYpos, CMP_COLOR& color);       //< \internal
-bool GetMipSetPixelColorARGB2101010(const MipSet& mipset, int nMipLevel, int nFaceOrSlice, int nXpos, int nYpos, CMP_WORD color[4]);   //< \internal
-bool GetMipSetPixelColorARGB16161616(const MipSet& mipset, int nMipLevel, int nFaceOrSlice, int nXpos, int nYpos, CMP_WORD color[4]);  //< \internal
-bool GetMipSetPixelColorARGB32(const MipSet& mipset, int nMipLevel, int nFaceOrSlice, int nXpos, int nYpos, CMP_DWORD color[4]);       //< \internal
-bool GetMipSetPixelColorARGB32F(const MipSet& mipset, int nMipLevel, int nFaceOrSlice, int nXpos, int nYpos, float color[4]);          //< \internal
 
 #ifdef __cplusplus
 };

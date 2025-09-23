@@ -63,15 +63,11 @@ typedef enum _CodecType
     CT_BC6H,
     CT_BC6H_SF,
     CT_BC7,
-#if (OPTION_BUILD_ASTC == 1)
-    CT_ASTC,
-#endif
     CT_APC,
     CT_GTC,
 #ifdef USE_BASIS
     CT_BASIS,
 #endif
-    CT_BRLG,
     CODECS_AMD_INTERNAL
 } CodecType;
 

@@ -61,9 +61,8 @@ CPUExtensions GetCPUExtensions()
 {
     CPUExtensions result = {};
 
-    int cpuInfo[4];
-
 #ifndef __linux__
+    int cpuInfo[4];
 
     GetCPUID(cpuInfo, 0);
 
@@ -140,9 +139,6 @@ void printinfo(char* info)
 
 void cmp_autodetected_cpufeatures(CMP_MATH_BYTE set)
 {
-    // Determine which features are available
-    CPUExtensions cpu = GetCPUExtensions();
-
     // Default: features always set to CPU
     cmp_set_cpu_features();
 
@@ -152,6 +148,9 @@ void cmp_autodetected_cpufeatures(CMP_MATH_BYTE set)
 
 #ifdef CMP_USE_XMMINTRIN
 #ifndef __linux__
+    // Determine which features are available
+    CPUExtensions cpu = GetCPUExtensions();
+
     // Auto detect CPU features to enable
     for (int i = 0; i < EXTENSION_COUNT; i++)
     {

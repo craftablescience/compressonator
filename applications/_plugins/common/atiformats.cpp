@@ -75,10 +75,6 @@ CMP_FormatDesc g_FormatDesc[] = {
 #endif
 
 // Compressed
-#if (OPTION_BUILD_ASTC == 1)
-    {CMP_FORMAT_ASTC, "ASTC"},
-#endif
-
     {CMP_FORMAT_ATI1N, "ATI1N"},
     {CMP_FORMAT_ATI2N, "ATI2N"},
     {CMP_FORMAT_ATI2N_XY, "ATI2N_XY"},
@@ -127,8 +123,6 @@ CMP_FormatDesc g_FormatDesc[] = {
     {CMP_FORMAT_BASIS, "BASIS"},
 #endif
     {CMP_FORMAT_BINARY, "CMPBIN"},
-    {CMP_FORMAT_BROTLIG, "BRLG"},
-
 };
 
 static const CMP_DWORD FORMAT_DESC_COUNT       = sizeof(g_FormatDesc) / sizeof(g_FormatDesc[0]);
@@ -300,9 +294,6 @@ void CMP_API CMP_Format2FourCC(CMP_FORMAT format, MipSet* pMipSet)
         pMipSet->m_dwFourCC = CMP_FOURCC_GTC;
         break;
 #endif
-    case CMP_FORMAT_BROTLIG:
-        pMipSet->m_dwFourCC = CMP_FOURCC_BROTLIG;
-        break;
 #ifdef USE_APC
     case CMP_FORMAT_APC:
         pMipSet->m_dwFourCC = CMP_FOURCC_APC;
@@ -322,11 +313,6 @@ void CMP_API CMP_Format2FourCC(CMP_FORMAT format, MipSet* pMipSet)
     case CMP_FORMAT_BC7:
         pMipSet->m_dwFourCC = CMP_FOURCC_DX10;
         break;
-#if (OPTION_BUILD_ASTC == 1)
-    case CMP_FORMAT_ASTC:
-        pMipSet->m_dwFourCC = CMP_FOURCC_DX10;
-        break;
-#endif
     default:
         pMipSet->m_dwFourCC = CMP_FOURCC_DX10;
     }
@@ -427,9 +413,6 @@ CMP_FORMAT CMP_API CMP_FourCC2Format(CMP_DWORD fourCC)
         return (CMP_FORMAT_GTC);
         break;
 #endif
-    case CMP_FOURCC_BROTLIG:
-        return (CMP_FORMAT_BROTLIG);
-        break;
 #ifdef USE_APC
     case CMP_FOURCC_APC:
         return (CMP_FORMAT_APC);
@@ -448,9 +431,6 @@ CMP_BOOL CMP_API CMP_IsCompressedFormat(CMP_FORMAT format)
 {
     switch (format)
     {
-#if (OPTION_BUILD_ASTC == 1)
-    case CMP_FORMAT_ASTC:
-#endif
     case CMP_FORMAT_ATI1N:
     case CMP_FORMAT_ATI2N:
     case CMP_FORMAT_ATI2N_XY:
@@ -488,7 +468,6 @@ CMP_BOOL CMP_API CMP_IsCompressedFormat(CMP_FORMAT format)
 #ifdef USE_APC
     case CMP_FORMAT_APC:  //< APC Texture Compressor
 #endif
-    case CMP_FORMAT_BROTLIG:
     case CMP_FORMAT_GTC:    //< GTC   Fast Gradient Texture Compressor
     case CMP_FORMAT_BASIS:  //< BASIS compression
     {
@@ -542,7 +521,6 @@ CMP_BOOL CMP_API CMP_IsLossless(CMP_FORMAT InFormat)
 {
     switch (InFormat)
     {
-    case CMP_FORMAT_BROTLIG:
     case CMP_FORMAT_BINARY: {
         return true;
     }
@@ -594,7 +572,6 @@ CMP_BOOL CMP_API CMP_IsValidFormat(CMP_FORMAT InFormat)
     case CMP_FORMAT_BGR_32F:
     case CMP_FORMAT_RG_32F:
     case CMP_FORMAT_R_32F:
-    case CMP_FORMAT_BROTLIG:
     case CMP_FORMAT_BC1:
     case CMP_FORMAT_BC2:
     case CMP_FORMAT_BC3:
@@ -793,10 +770,6 @@ static CMP_FORMAT GetFormat(CMP_DWORD dwFourCC)
         return CMP_FORMAT_BC6H;
     case CMP_FOURCC_BC7:
         return CMP_FORMAT_BC7;
-#if (OPTION_BUILD_ASTC == 1)
-    case CMP_FOURCC_ASTC:
-        return CMP_FORMAT_ASTC;
-#endif
 #ifdef USE_APC
     case CMP_FOURCC_APC:
         return CMP_FORMAT_APC;
@@ -809,8 +782,6 @@ static CMP_FORMAT GetFormat(CMP_DWORD dwFourCC)
     case CMP_FOURCC_BASIS:
         return CMP_FORMAT_BASIS;
 #endif
-    case CMP_FOURCC_BROTLIG:
-        return CMP_FORMAT_BROTLIG;
     default:
         return CMP_FORMAT_Unknown;
     }

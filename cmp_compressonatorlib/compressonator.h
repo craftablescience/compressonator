@@ -135,10 +135,6 @@ typedef enum : CMP_UINT
     CMP_FORMAT_RG_32F   = 0x10D0,  // Two component format with 32-bit floating-point channels.
     CMP_FORMAT_R_32F    = 0x10E0,  // Single component with 32-bit floating-point channels.
 
-    // Lossless Based Compression Formats --------------------------------------------------------------------------------
-    // Format 0x2nn0
-    CMP_FORMAT_BROTLIG = 0x2000,  //< Lossless CMP format compression : Prototyping
-
     // Compression formats ------------ GPU Mapping DirectX, Vulkan and OpenGL formats and comments --------
     // Compressed Format 0xSnn1..0xSnnF   (Keys 0x00Bv..0x00Bv) S =1 is signed, 0 = unsigned, B =Block Compressors 1..7 (BC1..BC7) and v > 1 is a variant like signed or swizzle
     CMP_FORMAT_BC1 = 0x0011,      // DXGI_FORMAT_BC1_UNORM GL_COMPRESSED_RGBA_S3TC_DXT1_EXT A four component opaque (or 1-bit alpha)
@@ -240,7 +236,6 @@ typedef enum
     CMP_ERR_GAMMA_OUTOFRANGE,              // Gamma value set for processing is out of range
     CMP_ERR_PLUGIN_SHAREDIO_NOT_SET,       // The plugin C_PluginSetSharedIO call was not set and is required for this plugin to operate
     CMP_ERR_UNABLE_TO_INIT_D3DX,           // Unable to initialize DirectX SDK or get a specific DX API
-    CMP_FRAMEWORK_NOT_INITIALIZED,         // CMP_InitFramework failed or not called.
     CMP_ERR_GENERIC                        // An unknown error occurred.
 } CMP_ERROR;
 
@@ -968,11 +963,6 @@ CMP_ERROR CMP_API CMP_ConvertTexture(CMP_Texture*               pSourceTexture,
                                      const CMP_CompressOptions* pOptions,
                                      CMP_Feedback_Proc          pFeedbackProc);
 
-// A basic function that can turn a specific mipmap level of a mipset into a texture object
-// does not handle all cases perfectly
-// Originally found in applications/_plugins/common/cmdline.cpp
-CMP_ERROR CMP_API CMP_MipSetToTexture(const CMP_MipSet* mipSet, CMP_INT mipLevelIndex, CMP_Texture* pDestTexture);
-
 #ifdef __cplusplus
 };
 #endif
@@ -1060,52 +1050,11 @@ CMP_ERROR CMP_API CMP_ConvertMipTexture(CMP_MipSet* p_MipSetIn, CMP_MipSet* p_Mi
 //--------------------------------------------
 // CMP_Framework Lib: Texture Encoder Interfaces
 //--------------------------------------------
-CMP_ERROR CMP_API  CMP_LoadTexture(const char* sourceFile, CMP_MipSet* pMipSet);
-CMP_ERROR CMP_API  CMP_SaveTexture(const char* destFile, CMP_MipSet* pMipSet);
-/// Saves a CMP_Texture to a file. For simple formats, this is a quick call to stb_image_write. 
-/// For more complex formats, a temporary mip set is created, therefore if you're working with a complex format, it is recommended to work with MipSets Directly.
-/// \param[in] destFile The destination file path
-/// \param[in] pTexture Pointer to the CMP_Texture to save
-/// \return CMP_OK if successful, otherwise an error code
-CMP_ERROR CMP_API  CMP_SaveTextureEx(const char* destFile, CMP_Texture* pTexture);
-CMP_ERROR CMP_API  CMP_ProcessTexture(CMP_MipSet* srcMipSet, CMP_MipSet* dstMipSet, KernelOptions kernelOptions, CMP_Feedback_Proc pFeedbackProc);
-CMP_ERROR CMP_API  CMP_CompressTexture(KernelOptions* options, CMP_MipSet srcMipSet, CMP_MipSet dstMipSet, CMP_Feedback_Proc pFeedback);
 CMP_VOID CMP_API   CMP_Format2FourCC(CMP_FORMAT format, CMP_MipSet* pMipSet);
 CMP_FORMAT CMP_API CMP_ParseFormat(char* pFormat);
-CMP_INT CMP_API    CMP_NumberOfProcessors();
-CMP_VOID CMP_API   CMP_FreeMipSet(CMP_MipSet* MipSetIn);
-CMP_VOID CMP_API   CMP_GetMipLevel(CMP_MipLevel** data, const CMP_MipSet* pMipSet, CMP_INT nMipLevel, CMP_INT nFaceOrSlice);
-CMP_ERROR CMP_API  CMP_GetPerformanceStats(KernelPerformanceStats* pPerfStats);
-CMP_ERROR CMP_API  CMP_GetDeviceInfo(KernelDeviceInfo* pDeviceInfo);
 CMP_BOOL CMP_API   CMP_IsCompressedFormat(CMP_FORMAT format);
 CMP_BOOL CMP_API   CMP_IsFloatFormat(CMP_FORMAT InFormat);
 CMP_BOOL CMP_API   CMP_IsValidFormat(CMP_FORMAT InFormat);
-
-//--------------------------------------------
-// CMP_Framework Lib: Host level interface
-//--------------------------------------------
-CMP_ERROR CMP_API CMP_CreateComputeLibrary(CMP_MipSet* srcTexture, KernelOptions* kernelOptions, void* Reserved);
-CMP_ERROR CMP_API CMP_DestroyComputeLibrary(CMP_BOOL forceClose);
-CMP_ERROR CMP_API CMP_SetComputeOptions(ComputeOptions* options);
-
-//---------------------------------------------------------
-// CMP_Framework Lib: Generic API to access the core using CMP_EncoderSetting
-//----------------------------------------------------------
-CMP_ERROR CMP_API CMP_CreateBlockEncoder(void** blockEncoder, CMP_EncoderSetting encodeSettings);
-CMP_ERROR CMP_API CMP_CompressBlock(void** blockEncoder, void* srcBlock, unsigned int sourceStride, void* dstBlock, unsigned int dstStride);
-CMP_ERROR CMP_API CMP_CompressBlockXY(void**       blockEncoder,
-                                      unsigned int blockx,
-                                      unsigned int blocky,
-                                      void*        imgSrc,
-                                      unsigned int sourceStride,
-                                      void*        cmpDst,
-                                      unsigned int dstStride);
-void CMP_API      CMP_DestroyBlockEncoder(void** blockEncoder);
-
-//-----------------------------------
-// CMP_Framework Lib: Host interface
-//-----------------------------------
-void CMP_InitFramework();
 
 #ifdef __cplusplus
 };

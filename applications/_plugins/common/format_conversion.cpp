@@ -286,7 +286,7 @@ ConvertedBuffer CreateCompatibleBuffer(CMP_FORMAT         targetFormat,
         }
     }
 
-    return std::move(result);
+    return result;
 }
 ConvertedBuffer CreateCompatibleBuffer(CMP_FORMAT targetFormat, const MipSet* srcMipSet, const FloatParams* params)
 {

@@ -53,10 +53,6 @@
 #include "codec_bc6h.h"
 #include "codec_bc7.h"
 
-#if (OPTION_BUILD_ASTC == 1)
-#include "astc/codec_astc.h"
-#endif
-
 #ifdef _WIN32  //GT only enabled for win build now
 #ifdef USE_APC
 #include "codec_apc.h"
@@ -235,10 +231,6 @@ CCodec* CreateCodec(CodecType nCodecType)
         return new CCodec_BC6H(nCodecType);
     case CT_BC7:
         return new CCodec_BC7;
-#if (OPTION_BUILD_ASTC == 1)
-    case CT_ASTC:
-        return new CCodec_ASTC;
-#endif
 #ifdef _WIN32
 #ifdef USE_APC
     case CT_APC:

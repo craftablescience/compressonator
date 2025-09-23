@@ -31,31 +31,9 @@ CMP_MipSetAnlaysis
 
 CMP_ConvertMipTexture
 
-CMP_MipSetToTexture
-
-CMP_LoadTexture
-CMP_SaveTexture
-CMP_SaveTextureEx
-CMP_ProcessTexture
-CMP_CompressTexture
 CMP_Format2FourCC
 CMP_ParseFormat
-CMP_NumberOfProcessors
-CMP_FreeMipSet
 CMP_GetMipLevel
-CMP_GetPerformanceStats
-CMP_GetDeviceInfo
 CMP_IsCompressedFormat
 CMP_IsFloatFormat
 CMP_IsValidFormat
-
-CMP_CreateComputeLibrary
-CMP_DestroyComputeLibrary
-CMP_SetComputeOptions
-
-CMP_CreateBlockEncoder
-CMP_CompressBlock
-CMP_CompressBlockXY
-CMP_DestroyBlockEncoder
-
-CMP_InitFramework

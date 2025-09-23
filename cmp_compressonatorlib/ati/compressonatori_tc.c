@@ -381,10 +381,6 @@ void atiDecodeRGBBlockATITC(Color888_t (*pPixelsOut)[4][4], unsigned int bitIndi
 {
     int        row, col;
     Color888_t aColor888[4];
-    static int iColorLow     = 0;
-    static int iColorMedLow  = 1;
-    static int iColorMedHigh = 2;
-    static int iColorHigh    = 3;
 
     //--------------------
     //  Setup the colors

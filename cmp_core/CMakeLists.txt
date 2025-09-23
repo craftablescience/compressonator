@@ -33,24 +33,6 @@ target_sources(CMP_Core
     ../applications/_libs/cmp_math/cmp_math_common.cpp
 )
 
-if (OPTION_CMP_GTC)
-    target_sources(
-        CMP_Core
-        PRIVATE
-        shaders/gtc_encode_kernel.h
-        shaders/gtc_encode_kernel.cpp
-    )
-endif()
-
-if (OPTION_BUILD_BROTLIG)
-    target_sources(
-        CMP_Core
-        PRIVATE
-        shaders/brlg_encode_kernel.h
-        shaders/brlg_encode_kernel.cpp
-    )
-endif()
-
 target_include_directories(CMP_Core
     PUBLIC
     shaders
@@ -62,14 +44,12 @@ if (UNIX)
     target_compile_definitions(CMP_Core PRIVATE _LINUX ASPM_GPU)
 endif()
 
-set_target_properties(CMP_Core PROPERTIES FOLDER ${PROJECT_FOLDER_SDK_LIBS})
-
 # Core SIMD options
 
 # Check architecture
 include(CheckCXXSourceCompiles)
 check_cxx_source_compiles("
-#if defined(__aarch64__) || defined(_M_ARM64)
+#if defined(__aarch64__) || defined(__arm__)
 int main() { return 0; }
 #else
 #error not arm64
@@ -88,8 +68,6 @@ if (UNIX)
         target_compile_options(CMP_Core_SSE PRIVATE -march=nehalem)
     endif()
 endif()
-
-set_target_properties(CMP_Core_SSE PROPERTIES FOLDER ${PROJECT_FOLDER_SDK_LIBS})
 
 # AVX
 add_library(CMP_Core_AVX STATIC)
@@ -110,8 +88,6 @@ else()
     endif()
 endif()
 
-set_target_properties(CMP_Core_AVX PROPERTIES FOLDER ${PROJECT_FOLDER_SDK_LIBS})
-
 # AVX-512
 add_library(CMP_Core_AVX512 STATIC)
 target_sources(CMP_Core_AVX512 PRIVATE source/core_simd_avx512.cpp)
@@ -127,11 +103,9 @@ else()
     if (CMP_IS_ARM64)
         target_compile_definitions(CMP_Core_AVX512 PRIVATE CMP_ARM64_BUILD)
     else()
-        target_compile_options(CMP_Core_AVX512 PRIVATE -march=knl)
+        target_compile_options(CMP_Core_AVX512 PRIVATE -mavx512f)
     endif()
 endif()
-
-set_target_properties(CMP_Core_AVX512 PROPERTIES FOLDER ${PROJECT_FOLDER_SDK_LIBS})
 
 # Link SIMD libraries to CMP_Core
 target_link_libraries(CMP_Core PRIVATE CMP_Core_SSE CMP_Core_AVX CMP_Core_AVX512)

@@ -26,7 +26,9 @@
 //  Description: implementation of the CCodec_ATI2N_DXT5 class
 //
 //////////////////////////////////////////////////////////////////////////////
+#ifdef _WIN32
 #pragma warning(disable : 4100)
+#endif
 
 #include "common.h"
 #include "codec_ati2n_dxt5.h"

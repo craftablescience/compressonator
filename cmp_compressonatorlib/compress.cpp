@@ -159,9 +159,6 @@ static void CMP_PrepareCMPSourceForIMG_Destination(CMP_Texture* destTexture, CMP
         }
     }
     // decompressed Data  is in the form RGBA_8888
-#if (OPTION_BUILD_ASTC == 1)
-    case CMP_FORMAT_ASTC:
-#endif
     case CMP_FORMAT_BC6H:
     case CMP_FORMAT_BC7:
     case CMP_FORMAT_GT:
@@ -251,15 +248,6 @@ CMP_ERROR CodecCompressTexture(const CMP_Texture* srcTexture, CMP_Texture* destT
 #ifdef USE_BASIS
         case CT_BASIS:
 #endif
-#if (OPTION_BUILD_ASTC == 1)
-        case CT_ASTC:
-            codec->SetParameter("Quality", (CODECFLOAT)options->fquality);
-            if (!options->bDisableMultiThreading)
-                codec->SetParameter(CodecParameters::NumThreads, (CMP_DWORD)options->dwnumThreads);
-            else
-                codec->SetParameter(CodecParameters::NumThreads, (CMP_DWORD)1);
-            break;
-#endif
 #ifdef USE_APC
         case CT_APC:
 #endif
@@ -312,27 +300,6 @@ CMP_ERROR CodecCompressTexture(const CMP_Texture* srcTexture, CMP_Texture* destT
     }
 
     CodecBufferType srcBufferType = GetCodecBufferType(srcTexture->format);
-
-    // There are some specific settings to configure when compressing to Brotli-G
-    if (destType == CT_BRLG)
-    {
-        // We always want to have the source data act as if it were binary data when compressing to Brotli-G
-        srcBufferType = GetCodecBufferType(CMP_FORMAT_BINARY);
-
-        if (srcTexture->format != CMP_FORMAT_BINARY)
-        {
-            codec->SetParameter(CodecParameters::Precondition, (CMP_DWORD)options->doPreconditionBRLG);
-            codec->SetParameter(CodecParameters::Swizzle, (CMP_DWORD)options->doSwizzleBRLG);
-            codec->SetParameter(CodecParameters::DeltaEncode, (CMP_DWORD)options->doDeltaEncodeBRLG);
-
-            codec->SetParameter(CodecParameters::TextureFormat, (CMP_DWORD)srcTexture->format);
-            codec->SetParameter(CodecParameters::TextureWidth, srcTexture->dwWidth);
-            codec->SetParameter(CodecParameters::TextureHeight, srcTexture->dwHeight);
-
-            if (srcTexture->pMipSet)
-                codec->SetParameter(CodecParameters::MipmapLevels, (CMP_DWORD)(((CMP_MipSet*)srcTexture->pMipSet)->m_nMipLevels));
-        }
-    }
 
     CCodecBuffer* srcBuffer = CreateCodecBuffer(srcBufferType,
                                                 srcTexture->nBlockWidth,
@@ -413,9 +380,6 @@ CMP_ERROR CodecDecompressTexture(const CMP_Texture* srcTexture, CMP_Texture* des
     destTexture->nBlockDepth  = srcTexture->nBlockDepth;
 
     CodecBufferType destBufferType = GetCodecBufferType(destTexture->format);
-
-    if (srcTexture->format == CMP_FORMAT_BROTLIG)
-        destBufferType = GetCodecBufferType(CMP_FORMAT_BINARY);
 
     CCodecBuffer* destBuffer = CreateCodecBuffer(destBufferType,
                                                  destTexture->nBlockWidth,
@@ -531,10 +495,6 @@ CMP_ERROR CodecCompressTextureThreaded(const CMP_Texture*         srcTexture,
 #endif
 #ifdef USE_BASIS
     if (destType == CT_BASIS)
-        return CMP_ABORTED;
-#endif
-#if (OPTION_BUILD_ASTC == 1)
-    if (destType == CT_ASTC)
         return CMP_ABORTED;
 #endif
 

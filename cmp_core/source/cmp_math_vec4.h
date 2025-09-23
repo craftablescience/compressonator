@@ -25,7 +25,9 @@
 #ifndef CMP_MATH_VEC4_H
 #define CMP_MATH_VEC4_H
 
+#ifdef _WIN32
 #pragma warning(disable : 4201)
+#endif
 
 //====================================================
 // Vector Class definitions for CPU & Intrinsics
