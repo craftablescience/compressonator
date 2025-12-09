@@ -1,5 +1,3 @@
-cmake_minimum_required(VERSION 3.10)
-
 file(GLOB_RECURSE CMP_SRCS
     # Lossy Compression
     "apc/*.h"
@@ -84,11 +82,7 @@ target_link_libraries(CMP_Compressonator
         CMP_Core
 )
 
-# Set RPATH so the library can find its dependencies at runtime
-# // https://duerrenberger.dev/blog/2021/08/04/understanding-rpath-with-cmake/
-if(UNIX)
-    set_target_properties(CMP_Compressonator PROPERTIES
-        INSTALL_RPATH "$ORIGIN"
-        BUILD_WITH_INSTALL_RPATH TRUE
-    )
-endif()
+target_compile_definitions(CMP_Compressonator
+        PRIVATE
+        ENABLE_MAKE_COMPATIBLE_API  # Byte<->Float to make all source and dest compatible
+)

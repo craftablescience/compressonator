@@ -132,7 +132,7 @@ void printinfo(char* info)
 {
     CMP_UNUSED(info);
 
-#if defined(_DEBUG) && defined(CMP_VERBOSE)
+#if defined(CMP_VERBOSE)
     printf("%s", info);
 #endif
 }

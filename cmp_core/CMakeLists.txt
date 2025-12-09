@@ -1,9 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
-
-add_library(CMP_Core STATIC)
-
-target_sources(CMP_Core
-    PRIVATE
+add_library(CMP_Core STATIC
     shaders/bc1_encode_kernel.h
     shaders/bc1_common_kernel.h
     shaders/bc1_encode_kernel.cpp

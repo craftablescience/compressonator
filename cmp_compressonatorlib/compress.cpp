@@ -421,11 +421,6 @@ CMP_ERROR CodecCompressTextureThreaded(const CMP_Texture*         srcTexture,
     CMP_BYTE* pDestData        = destTexture->pData;
     CMP_BOOL  swizzleSrcBuffer = false;
 
-#ifdef _DEBUG
-    if ((destTexture->format == CMP_FORMAT_ETC2_RGBA) || (destTexture->format == CMP_FORMAT_ETC2_RGBA1))
-        dwMaxThreadCount = 1;
-#endif
-
     CATICompressThreadData aThreadData[MAX_THREADS];
     std::thread            ahThread[MAX_THREADS];
 
