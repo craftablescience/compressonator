@@ -39,14 +39,6 @@ file(GLOB_RECURSE CMP_SRCS
     ${PROJECT_SOURCE_DIR}/cmp_framework/common/*.cpp
     ${PROJECT_SOURCE_DIR}/cmp_framework/common/half/*.h
     ${PROJECT_SOURCE_DIR}/cmp_framework/common/half/*.cpp
-    ${PROJECT_SOURCE_DIR}/applications/_plugins/common/atiformats.cpp
-    ${PROJECT_SOURCE_DIR}/applications/_plugins/common/atiformats.h
-    ${PROJECT_SOURCE_DIR}/applications/_plugins/common/format_conversion.h
-    ${PROJECT_SOURCE_DIR}/applications/_plugins/common/format_conversion.cpp
-    ${PROJECT_SOURCE_DIR}/applications/_plugins/common/codec_common.h
-    ${PROJECT_SOURCE_DIR}/applications/_plugins/common/codec_common.cpp
-    ${PROJECT_SOURCE_DIR}/applications/_plugins/common/texture_utils.h
-    ${PROJECT_SOURCE_DIR}/applications/_plugins/common/texture_utils.cpp
 )
 
 add_library(CMP_Compressonator 
