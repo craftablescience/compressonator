@@ -61,7 +61,7 @@ CPUExtensions GetCPUExtensions()
 {
     CPUExtensions result = {};
 
-#ifndef __linux__
+#ifdef _WIN32
     int cpuInfo[4];
 
     GetCPUID(cpuInfo, 0);
@@ -146,7 +146,7 @@ void cmp_autodetected_cpufeatures(CMP_MATH_BYTE set)
     if ((set & CMP_MATH_USE_CPU) > 0)
         return;
 
-#ifndef __linux__
+#ifdef _WIN32
     // Determine which features are available
     CPUExtensions cpu = GetCPUExtensions();
 

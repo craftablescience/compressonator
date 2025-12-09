@@ -35,16 +35,15 @@ float cpu_sqrtf(float* pIn)
     return sqrtf(*pIn);
 }
 
-#ifndef __linux__
+#ifdef _WIN32
 //---------------------------------------------
 // SSE: Computes square root of  a float value
 //---------------------------------------------
 float sse_sqrtf(float* pIn)
 {
-    //printf("sse    : ");
-    __m128 val = _mm_load1_ps(pIn);
-    val        = _mm_sqrt_ss(val);
-    return val.m128_f32[0];
+    float val;
+    _mm_store_ss(&val, _mm_sqrt_ss(_mm_load_ss(pIn)));
+    return val;
 }
 #endif
 
@@ -60,7 +59,7 @@ float cpu_rsqf(float* f)
         return 0.0f;
 }
 
-#ifndef __linux__
+#ifdef _WIN32
 //-------------------------------------------------
 // SSE: Computes 1 / (square root of a float value)
 //-------------------------------------------------
@@ -69,7 +68,8 @@ float sse_rsqf(float* v)
 {
     __m128 val = _mm_load1_ps(v);
     val        = _mm_rsqrt_ss(val);
-    float frsq = val.m128_f32[0];
+    float frsq;
+    _mm_store_ss(&frsq, val);
     return (0.5f * frsq) * (3.0f - (*v * frsq) * frsq);
 };
 #else
@@ -79,7 +79,9 @@ float sse_rsqf(float* v)
     __m128 val1 = _mm_set_ss(1.0f);
     val         = _mm_sqrt_ss(val);
     val         = _mm_div_ss(val1, val);
-    return (val.m128_f32[0]);
+    float f;
+    _mm_store_ss(&f, val);
+    return f;
 };
 #endif
 #endif
@@ -89,15 +91,19 @@ float sse_rsqf(float* v)
 //---------------------------------------------
 float cpu_minf(float l1, float r1)
 {
-    return (l1 < r1 ? l1 : r1);
+    return l1 < r1 ? l1 : r1;
 }
 
-#ifndef __linux__
+#ifdef _WIN32
 float sse_minf(float a, float b)
 {
-    // Branchless SSE min.
+#ifdef _WIN32
     _mm_store_ss(&a, _mm_min_ss(_mm_set_ss(a), _mm_set_ss(b)));
     return a;
+#else
+    // Will be auto-vectorized
+    return a < b ? a : b;
+#endif
 }
 #endif
 
@@ -106,15 +112,19 @@ float sse_minf(float a, float b)
 //---------------------------------------------
 float cpu_maxf(float l1, float r1)
 {
-    return (l1 > r1 ? l1 : r1);
+    return l1 > r1 ? l1 : r1;
 }
 
-#ifndef __linux__
+#ifdef _WIN32
 float sse_maxf(float a, float b)
 {
-    // Branchless SSE max.
+#ifdef _WIN32
     _mm_store_ss(&a, _mm_max_ss(_mm_set_ss(a), _mm_set_ss(b)));
     return a;
+#else
+    // Will be auto-vectorized
+    return a > b ? a : b;
+#endif
 }
 #endif
 
@@ -134,11 +144,15 @@ float cpu_clampf(float value, float minval, float maxval)
     return value;
 }
 
-#ifndef __linux__
+#ifdef _WIN32
 float sse_clampf(float val, float minval, float maxval)
 {
-    _mm_store_ss(&val, _mm_min_ss(_mm_max_ss(_mm_set_ss(val), _mm_set_ss(minval)), _mm_set_ss(maxval)));
+#ifdef _WIN32
+    mm_store_ss(&val, _mm_min_ss(_mm_max_ss(_mm_set_ss(val), _mm_set_ss(minval)), _mm_set_ss(maxval)));
     return val;
+#else
+    return sse_minf(sse_maxf(val, minval), maxval);
+#endif
 }
 #endif
 
@@ -215,7 +229,7 @@ float cpu_lerp2(CMP_Vec4uc C1, CMP_Vec4uc CA, CMP_Vec4uc CB, CMP_Vec4uc C2, CMP_
     return float(min1 + min2);
 }
 
-#ifndef __linux__
+#ifdef _WIN32
 float sse_lerp2(CMP_Vec4uc C1, CMP_Vec4uc CA, CMP_Vec4uc CB, CMP_Vec4uc C2, CMP_MATH_BYTE* encode1, CMP_MATH_BYTE* encode2)
 {
     // Initial Setup
@@ -353,7 +367,7 @@ void cmp_set_cpu_features()
     cmp_sqrtf2  = cpu_sqrtf;
 }
 
-#ifndef __linux__
+#ifdef _WIN32
 void cmp_set_sse2_features()
 {
     cmp_clampf2 = sse_clampf;

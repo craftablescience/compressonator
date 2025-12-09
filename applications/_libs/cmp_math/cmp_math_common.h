@@ -42,7 +42,7 @@
 typedef unsigned char CMP_MATH_BYTE;
 typedef unsigned int  CMP_MATH_DWORD;
 
-#ifndef __linux__
+#ifdef _WIN32
 extern void cmp_set_fma3_features();
 extern void cmp_set_sse2_features();
 #endif
@@ -59,7 +59,7 @@ extern float cpu_minf(float l1, float r1);
 extern float cpu_rsqf(float* f);
 extern float cpu_sqrtf(float* pIn);
 
-#ifndef __linux__
+#ifdef _WIN32
 extern float sse_clampf(float value, float minval, float maxval);
 extern float sse_lerp2(CMP_Vec4uc C1, CMP_Vec4uc CA, CMP_Vec4uc CB, CMP_Vec4uc C2, CMP_MATH_BYTE* encode1, CMP_MATH_BYTE* encode2);
 extern float sse_maxf(float l1, float r1);
