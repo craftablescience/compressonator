@@ -72,8 +72,6 @@ target_include_directories(CMP_Compressonator
     common
     ${PROJECT_SOURCE_DIR}/cmp_framework/common
     ${PROJECT_SOURCE_DIR}/cmp_framework/common/half
-    ${PROJECT_SOURCE_DIR}/applications/_plugins/common
-    ${PROJECT_SOURCE_DIR}/applications/_libs/cmp_math/
 )
 
 target_include_directories(CMP_Compressonator
