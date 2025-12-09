@@ -104,88 +104,6 @@ CMP_ERROR GetError(CodecError err)
     }
 }
 
-#ifndef USE_OLD_SWIZZLE
-
-// For now this function will only handle a single case
-// where the source data remains the same size and only RGBA channels
-// are swizzled according output compressed formats,
-// if source is compressed then no change is performed
-
-static void CMP_PrepareCMPSourceForIMG_Destination(CMP_Texture* destTexture, CMP_FORMAT srcFormat)
-{
-    CMP_DWORD  dwWidth      = destTexture->dwWidth;
-    CMP_DWORD  dwHeight     = destTexture->dwHeight;
-    CMP_FORMAT newDstFormat = destTexture->format;
-    CMP_BYTE*  pData;
-
-    pData = destTexture->pData;
-
-    switch (srcFormat)
-    {
-    // decompressed Data  is in the form BGRA
-    case CMP_FORMAT_ATI1N:
-    case CMP_FORMAT_ATI2N:
-    case CMP_FORMAT_ATI2N_XY:
-    case CMP_FORMAT_ATI2N_DXT5:
-    case CMP_FORMAT_ATC_RGB:
-    case CMP_FORMAT_ATC_RGBA_Explicit:
-    case CMP_FORMAT_ATC_RGBA_Interpolated:
-    case CMP_FORMAT_BC1:
-    case CMP_FORMAT_BC2:
-    case CMP_FORMAT_BC3:
-    case CMP_FORMAT_BC4:
-    case CMP_FORMAT_BC4_S:
-    case CMP_FORMAT_BC5:
-    case CMP_FORMAT_BC5_S:
-    case CMP_FORMAT_DXT1:
-    case CMP_FORMAT_DXT3:
-    case CMP_FORMAT_DXT5:
-    case CMP_FORMAT_DXT5_xGBR:
-    case CMP_FORMAT_DXT5_RxBG:
-    case CMP_FORMAT_DXT5_RBxG:
-    case CMP_FORMAT_DXT5_xRBG:
-    case CMP_FORMAT_DXT5_RGxB:
-    case CMP_FORMAT_DXT5_xGxR: {
-        switch (newDstFormat)
-        {
-        case CMP_FORMAT_BGRA_8888:
-            break;
-        case CMP_FORMAT_RGBA_8888: {
-            CMP_Map_Bytes(pData, dwWidth, dwHeight, {2, 1, 0, 3}, 4);
-            break;
-        }
-        default:
-            break;
-        }
-    }
-    // decompressed Data  is in the form RGBA_8888
-    case CMP_FORMAT_BC6H:
-    case CMP_FORMAT_BC7:
-    case CMP_FORMAT_GT:
-    case CMP_FORMAT_ETC_RGB:
-    case CMP_FORMAT_ETC2_RGB:
-    case CMP_FORMAT_ETC2_SRGB:
-    case CMP_FORMAT_ETC2_RGBA:
-    case CMP_FORMAT_ETC2_RGBA1:
-    case CMP_FORMAT_ETC2_SRGBA:
-    case CMP_FORMAT_ETC2_SRGBA1: {
-        switch (newDstFormat)
-        {
-        case CMP_FORMAT_RGBA_8888:
-            break;
-        case CMP_FORMAT_BGRA_8888: {
-            CMP_Map_Bytes(pData, dwWidth, dwHeight, {2, 1, 0, 3}, 4);
-            break;
-        }
-        default:
-            break;
-        }
-    }
-    }
-}
-
-#endif
-
 CMP_ERROR CodecCompressTexture(const CMP_Texture* srcTexture, CMP_Texture* destTexture, const CMP_CompressOptions* options, CMP_Feedback_Proc feedbackProc)
 {
     CodecType destType = GetCodecType(destTexture->format);
@@ -420,10 +338,6 @@ CMP_ERROR CodecDecompressTexture(const CMP_Texture* srcTexture, CMP_Texture* des
     RESTORE_FP_EXCEPTIONS;
 
     destTexture->dwDataSize = destBuffer->GetDataSize();
-
-#ifndef USE_OLD_SWIZZLE
-    CMP_PrepareCMPSourceForIMG_Destination(destTexture, srcTexture->format);
-#endif
 
     SAFE_DELETE(codec);
     SAFE_DELETE(srcBuffer);

@@ -146,7 +146,6 @@ void cmp_autodetected_cpufeatures(CMP_MATH_BYTE set)
     if ((set & CMP_MATH_USE_CPU) > 0)
         return;
 
-#ifdef CMP_USE_XMMINTRIN
 #ifndef __linux__
     // Determine which features are available
     CPUExtensions cpu = GetCPUExtensions();
@@ -204,6 +203,5 @@ void cmp_autodetected_cpufeatures(CMP_MATH_BYTE set)
             }
         }
     }
-#endif
 #endif
 }

@@ -58,10 +58,6 @@
 #define USE_ETCPACK  // Use ETCPack for ETC2 else use CModel code!
 #endif
 
-#ifndef USE_OLD_SWIZZLE
-#define USE_OLD_SWIZZLE  //  Remove swizzle flag and abide by CMP_Formats
-#endif
-
 typedef half CMP_HALF;  ///< A 16-bit floating point number class
 
 #define QT_KEY_SPACE 0x20  // Qt::Key_Space = 0x20

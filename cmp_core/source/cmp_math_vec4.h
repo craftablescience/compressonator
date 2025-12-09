@@ -639,10 +639,8 @@ public:
 //     return out << v.x << ", " << v.y << ", " << v.z;
 // }
 
-#ifdef CMP_USE_XMMINTRIN
-
 #include <stdio.h>
-#include "xmmintrin.h"
+#include "immintrin.h"
 #include <math.h>
 #include <float.h>
 
@@ -832,8 +830,6 @@ public:
         return _mm_xor_ps(is_true, vec128);
     };
 };
-
-#endif
 
 typedef Vec4T<float>         CMP_Vec4f;
 typedef Vec4T<double>        CMP_Vec4d;

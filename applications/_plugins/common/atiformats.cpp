@@ -175,7 +175,7 @@ CMP_TextureType ParseTextureType(char* typeString)
     return TT_Unknown;
 }
 
-CMP_CHAR* GetFormatDesc(CMP_FORMAT nFormat)
+const CMP_CHAR* GetFormatDesc(CMP_FORMAT nFormat)
 {
     for (CMP_DWORD i = 0; i < FORMAT_DESC_COUNT; i++)
     {
@@ -185,7 +185,7 @@ CMP_CHAR* GetFormatDesc(CMP_FORMAT nFormat)
     return g_FormatDesc[0].pszFormatDesc;
 }
 
-CMP_CHAR* GetTextureTypeDesc(CMP_TextureType nTextureType)
+const CMP_CHAR* GetTextureTypeDesc(CMP_TextureType nTextureType)
 {  // depthsupport
     for (CMP_DWORD i = 0; i < TEXTURE_TYPE_DESC_COUNT; i++)
         if (nTextureType == g_TextureTypeDesc[i].nTextureType)

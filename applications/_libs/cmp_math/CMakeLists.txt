@@ -1,12 +1,6 @@
 
 add_library(CMP_Math)
 
-if(CMP_HOST_WINDOWS)
-    target_compile_definitions(CMP_Math PUBLIC
-        -DCMP_USE_XMMINTRIN
-        )
-endif()
-
 target_sources(CMP_Math PRIVATE
 
     cmp_math_common.cpp

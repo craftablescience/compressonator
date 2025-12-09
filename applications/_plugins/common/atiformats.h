@@ -29,14 +29,14 @@
 
 typedef struct
 {
-    CMP_FORMAT nFormat;
-    CMP_CHAR*  pszFormatDesc;
+    CMP_FORMAT      nFormat;
+    const CMP_CHAR* pszFormatDesc;
 } CMP_FormatDesc;
 
 typedef struct
 {
     CMP_TextureType nTextureType;
-    CMP_CHAR*       pszTextureTypeDesc;
+    const CMP_CHAR* pszTextureTypeDesc;
 } CMP_TextureTypeDesc;
 
 #ifdef __cplusplus
@@ -56,8 +56,8 @@ CMP_BOOL CMP_API   CMP_IsValidFormat(CMP_FORMAT InFormat);
 
 CMP_TextureType ParseTextureType(char* typeString);
 
-CMP_CHAR* GetFormatDesc(CMP_FORMAT nFormat);
-CMP_CHAR* GetTextureTypeDesc(CMP_TextureType nTextureType);
+const CMP_CHAR* GetFormatDesc(CMP_FORMAT nFormat);
+const CMP_CHAR* GetTextureTypeDesc(CMP_TextureType nTextureType);
 
 CMP_ChannelFormat GetChannelFormat(CMP_FORMAT format);
 CMP_BYTE          GetChannelFormatBitSize(CMP_FORMAT format);

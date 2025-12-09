@@ -42,11 +42,9 @@
 typedef unsigned char CMP_MATH_BYTE;
 typedef unsigned int  CMP_MATH_DWORD;
 
-#ifdef CMP_USE_XMMINTRIN
 #ifndef __linux__
 extern void cmp_set_fma3_features();
 extern void cmp_set_sse2_features();
-#endif
 #endif
 
 extern void cmp_set_cpu_features();

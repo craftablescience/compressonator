@@ -35,7 +35,6 @@ float cpu_sqrtf(float* pIn)
     return sqrtf(*pIn);
 }
 
-#ifdef CMP_USE_XMMINTRIN
 #ifndef __linux__
 //---------------------------------------------
 // SSE: Computes square root of  a float value
@@ -47,7 +46,6 @@ float sse_sqrtf(float* pIn)
     val        = _mm_sqrt_ss(val);
     return val.m128_f32[0];
 }
-#endif
 #endif
 
 //-------------------------------------------------
@@ -62,7 +60,6 @@ float cpu_rsqf(float* f)
         return 0.0f;
 }
 
-#ifdef CMP_USE_XMMINTRIN
 #ifndef __linux__
 //-------------------------------------------------
 // SSE: Computes 1 / (square root of a float value)
@@ -86,7 +83,6 @@ float sse_rsqf(float* v)
 };
 #endif
 #endif
-#endif
 
 //---------------------------------------------
 // CPU: Computes min of two float values
@@ -96,7 +92,6 @@ float cpu_minf(float l1, float r1)
     return (l1 < r1 ? l1 : r1);
 }
 
-#ifdef CMP_USE_XMMINTRIN
 #ifndef __linux__
 float sse_minf(float a, float b)
 {
@@ -104,7 +99,6 @@ float sse_minf(float a, float b)
     _mm_store_ss(&a, _mm_min_ss(_mm_set_ss(a), _mm_set_ss(b)));
     return a;
 }
-#endif
 #endif
 
 //---------------------------------------------
@@ -115,7 +109,6 @@ float cpu_maxf(float l1, float r1)
     return (l1 > r1 ? l1 : r1);
 }
 
-#ifdef CMP_USE_XMMINTRIN
 #ifndef __linux__
 float sse_maxf(float a, float b)
 {
@@ -123,7 +116,6 @@ float sse_maxf(float a, float b)
     _mm_store_ss(&a, _mm_max_ss(_mm_set_ss(a), _mm_set_ss(b)));
     return a;
 }
-#endif
 #endif
 
 //================================================
@@ -142,14 +134,12 @@ float cpu_clampf(float value, float minval, float maxval)
     return value;
 }
 
-#ifdef CMP_USE_XMMINTRIN
 #ifndef __linux__
 float sse_clampf(float val, float minval, float maxval)
 {
     _mm_store_ss(&val, _mm_min_ss(_mm_max_ss(_mm_set_ss(val), _mm_set_ss(minval)), _mm_set_ss(maxval)));
     return val;
 }
-#endif
 #endif
 
 void cpu_averageRGB(unsigned char* src_rgba_block)
@@ -225,7 +215,6 @@ float cpu_lerp2(CMP_Vec4uc C1, CMP_Vec4uc CA, CMP_Vec4uc CB, CMP_Vec4uc C2, CMP_
     return float(min1 + min2);
 }
 
-#ifdef CMP_USE_XMMINTRIN
 #ifndef __linux__
 float sse_lerp2(CMP_Vec4uc C1, CMP_Vec4uc CA, CMP_Vec4uc CB, CMP_Vec4uc C2, CMP_MATH_BYTE* encode1, CMP_MATH_BYTE* encode2)
 {
@@ -352,7 +341,6 @@ void cmp_set_fma3_features()
     cmp_lerp2 = fma_lerp2;
 }
 #endif
-#endif
 
 void cmp_set_cpu_features()
 {
@@ -365,7 +353,6 @@ void cmp_set_cpu_features()
     cmp_sqrtf2  = cpu_sqrtf;
 }
 
-#ifdef CMP_USE_XMMINTRIN
 #ifndef __linux__
 void cmp_set_sse2_features()
 {
@@ -376,7 +363,6 @@ void cmp_set_sse2_features()
     cmp_rsqf2   = sse_rsqf;
     cmp_sqrtf2  = sse_sqrtf;
 }
-#endif
 #endif
 
 //---------------------------------
