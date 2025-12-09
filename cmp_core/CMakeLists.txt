@@ -26,18 +26,16 @@ target_sources(CMP_Core
 
     source/cmp_core.h
     source/cmp_core.cpp
+    source/cmp_math_common.cpp
     source/cmp_math_vec4.h
     source/cmp_math_func.h
-
-    ../applications/_libs/cmp_math/cpu_extensions.cpp
-    ../applications/_libs/cmp_math/cmp_math_common.cpp
+    source/cpu_extensions.cpp
 )
 
 target_include_directories(CMP_Core
     PUBLIC
     shaders
     source
-    ../applications/_libs/cmp_math/
 )
 
 if (UNIX)
