@@ -112,11 +112,12 @@
 #ifdef ASPM_GPU
 #undef ASPM_GPU
 #endif
-#include <cstring>
 #include <cmath>
 #include <stdio.h>
 #include INC_cmp_math_vec4
 #endif
+
+#include <cstring>
 
 #ifdef _WIN32
 //#define USE_ASPM_CODE
