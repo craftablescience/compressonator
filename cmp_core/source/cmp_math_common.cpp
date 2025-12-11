@@ -148,7 +148,7 @@ float cpu_clampf(float value, float minval, float maxval)
 float sse_clampf(float val, float minval, float maxval)
 {
 #ifdef _WIN32
-    mm_store_ss(&val, _mm_min_ss(_mm_max_ss(_mm_set_ss(val), _mm_set_ss(minval)), _mm_set_ss(maxval)));
+    _mm_store_ss(&val, _mm_min_ss(_mm_max_ss(_mm_set_ss(val), _mm_set_ss(minval)), _mm_set_ss(maxval)));
     return val;
 #else
     return sse_minf(sse_maxf(val, minval), maxval);
