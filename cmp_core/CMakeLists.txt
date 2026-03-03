@@ -39,7 +39,7 @@ endif()
 
 # Core SIMD options
 
-if(APPLE)
+if(APPLE OR EMSCRIPTEN)
     # Send me a patch that fixes these if you want SIMD because I do not care
     target_sources(CMP_Core
             PRIVATE
