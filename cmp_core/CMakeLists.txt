@@ -39,7 +39,7 @@ endif()
 
 # Core SIMD options
 
-if(APPLE OR EMSCRIPTEN)
+if(APPLE OR EMSCRIPTEN OR (CMAKE_CXX_BYTE_ORDER STREQUAL "BIG_ENDIAN"))
     # Send me a patch that fixes these if you want SIMD because I do not care
     target_sources(CMP_Core
             PRIVATE
